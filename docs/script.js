@@ -15,14 +15,41 @@ pantalla.classList.remove('activa'));
     document.getElementById(idPantalla).classList.add('activa'); 
 } 
  
-// Función de validación de entrada 
-function validarEntrada(valorEntrada, nombreCampo) { 
-    if (isNaN(valorEntrada) || valorEntrada <= 0) { 
-        throw new Error(`${nombreCampo} debe ser un número positivo`); 
-    } 
-    return parseFloat(valorEntrada); 
-} 
- 
+// Función de validación de entrada
+function validarEntrada(valorEntrada, nombreCampo) {
+    const valorStr = String(valorEntrada).trim();
+
+    // Verificar si está vacío
+    if (valorStr === "") {
+        throw new Error(`${nombreCampo} no puede estar vacío`);
+    }
+
+    // Verificar letras
+    if (/[a-zA-Z]/.test(valorStr)) {
+        throw new Error(`No se permiten letras en ${nombreCampo}`);
+    }
+
+    // Verificar caracteres especiales (excepto punto y signo negativo)
+    if (/[^0-9.\-]/.test(valorStr)) {
+        throw new Error(`No se permiten caracteres especiales en ${nombreCampo}`);
+    }
+
+    // Convertir a número
+    const numero = parseFloat(valorStr);
+
+    // Verificar si es un número válido
+    if (isNaN(numero)) {
+        throw new Error(`${nombreCampo} debe ser un número válido`);
+    }
+
+    // Verificar si es negativo o cero
+    if (numero <= 0) {
+        throw new Error(`No se permiten números negativos en ${nombreCampo}`);
+    }
+
+    return numero;
+}
+
 // Función para mostrar resultados o errores 
 function mostrarResultado(idElemento, textoResultado, mensajeError = 
 null) { 
@@ -196,21 +223,46 @@ errorCapturado.message);
  
 // ============= MATRICES ============= 
  
-function crearEntradasMatriz() { 
-    const contenedorCuadricula = document.getElementById('contenedor-cuadricula-matriz'); 
-    contenedorCuadricula.innerHTML = ''; 
-     
-    // Crear 16 inputs para matriz 4x4 
-    for (let indiceEntrada = 0; indiceEntrada < 16; indiceEntrada++) { 
-        const entradaMatriz = document.createElement('input'); 
-        entradaMatriz.type = 'number'; 
-        entradaMatriz.className = 'entrada-matriz'; 
-        entradaMatriz.step = '0.1'; 
-        entradaMatriz.placeholder = '0'; 
-        entradaMatriz.id = `entrada-matriz-${indiceEntrada}`; 
-        contenedorCuadricula.appendChild(entradaMatriz); 
-    } 
-} 
+function crearEntradasMatriz() {
+    const contenedorCuadricula = document.getElementById('contenedor-cuadricula-matriz');
+    contenedorCuadricula.innerHTML = '';
+
+    // Limpiar mensajes previos
+    mostrarResultado('resultado-matriz', '');
+
+    // Crear 16 inputs para matriz 4x4
+    for (let indiceEntrada = 0; indiceEntrada < 16; indiceEntrada++) {
+        const entradaMatriz = document.createElement('input');
+        entradaMatriz.className = 'entrada-matriz';
+        entradaMatriz.step = '0.1';
+        entradaMatriz.placeholder = '0';
+        entradaMatriz.id = `entrada-matriz-${indiceEntrada}`;
+
+        // Validación en tiempo real
+        entradaMatriz.addEventListener('input', function () {
+            const valor = this.value;
+
+            // Detectar letras
+            if (/[a-zA-Z]/.test(valor)) {
+                mostrarResultado('resultado-matriz', null, `No se permiten letras en la posición ${indiceEntrada + 1}`);
+                this.value = valor.replace(/[a-zA-Z]/g, '');
+                return;
+            }
+
+            // Detectar caracteres especiales (excepto punto y signo negativo)
+            if (/[^0-9.\-]/.test(valor)) {
+                mostrarResultado('resultado-matriz', null, `No se permiten caracteres especiales en la posición ${indiceEntrada + 1}`);
+                this.value = valor.replace(/[^0-9.\-]/g, '');
+                return;
+            }
+
+            // Si todo está bien, limpiar mensaje de error
+            mostrarResultado('resultado-matriz', '');
+        });
+
+        contenedorCuadricula.appendChild(entradaMatriz);
+    }
+}
  
 function obtenerValoresMatriz() { 
     const matrizCompleta = []; 

@@ -1,0 +1,185 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial
+scale=1.0"> 
+    <title>Calculadora Geométrica y Matrices</title> 
+    <link rel="stylesheet" href="styles.css"> 
+</head> 
+<body> 
+    <div class="contenedor"> 
+        <!-- Pantalla Principal --> 
+        <div id="pantalla-principal" class="pantalla activa"> 
+            <h1>🔢 Calculadora Geométrica y Matrices</h1> 
+            <button class="boton" onclick="mostrarPantalla('menu-figuras-2d')">📐 Figuras 2D</button> 
+            <button class="boton" onclick="mostrarPantalla('menu-figuras-3d')">🧊 Figuras 3D</button> 
+            <button class="boton" onclick="mostrarPantalla('pantallamatrices')">🔢 Matrices</button> 
+        </div> 
+ 
+        <!-- Menú Figuras 2D --> 
+        <div id="menu-figuras-2d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('pantalla-principal')">← Volver</button> 
+            <h2>Figuras 2D</h2> 
+            <button class="boton" onclick="mostrarPantalla('pantallacirculo-2d')">⭕ Círculo</button> 
+            <button class="boton" onclick="mostrarPantalla('pantallacuadrado-2d')">⬜ Cuadrado</button> 
+            <button class="boton" onclick="mostrarPantalla('pantallatriangulo-2d')">🔺 Triángulo</button> 
+        </div> 
+ 
+        <!-- Menú Figuras 3D --> 
+        <div id="menu-figuras-3d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('pantalla-principal')">← Volver</button> 
+            <h2>Figuras 3D</h2> 
+            <button class="boton" onclick="mostrarPantalla('pantallaesfera-3d')">🟠 Esfera</button> 
+            <button class="boton" onclick="mostrarPantalla('pantallacubo-3d')">🧊 Cubo</button> 
+            <button class="boton" onclick="mostrarPantalla('pantallacilindro-3d')">🥤 Cilindro</button> 
+        </div> 
+ 
+        <!-- Círculo 2D --> 
+        <div id="pantallacirculo-2d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('menu-figuras-2d')">← Volver</button> 
+            <h2>⭕ Círculo</h2> 
+            <div class="grupo-entrada"> 
+                <label>Radio:</label> 
+                <input type="number" id="entrada-radio-circulo" 
+placeholder="Ingrese el radio" min="0" step="0.01"> 
+            </div> 
+            <button class="boton" 
+onclick="calcularCirculo2D('area')">Calcular Área</button> 
+            <button class="boton" 
+onclick="calcularCirculo2D('perimetro')">Calcular Perímetro</button> 
+            <div id="resultado-circulo-2d" class="resultado">Los 
+resultados aparecerán aquí</div> 
+        </div> 
+ 
+        <!-- Cuadrado 2D --> 
+        <div id="pantallacuadrado-2d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('menu-figuras-2d')">← Volver</button> 
+            <h2>⬜ Cuadrado</h2> 
+            <div class="grupo-entrada"> 
+                <label>Lado:</label> 
+                <input type="number" id="entrada-lado-cuadrado" 
+placeholder="Ingrese el lado" min="0" step="0.01"> 
+            </div> 
+            <button class="boton" 
+onclick="calcularCuadrado2D('area')">Calcular Área</button> 
+            <button class="boton" 
+onclick="calcularCuadrado2D('perimetro')">Calcular Perímetro</button> 
+            <div id="resultado-cuadrado-2d" class="resultado">Los 
+resultados aparecerán aquí</div> 
+        </div> 
+ 
+        <!-- Triángulo 2D --> 
+        <div id="pantallatriangulo-2d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('menu-figuras-2d')">← Volver</button> 
+            <h2>🔺 Triángulo</h2> 
+            <div class="grupo-entrada"> 
+                <label>Base:</label> 
+                <input type="number" id="entrada-base-triangulo" 
+placeholder="Ingrese la base" min="0" step="0.01"> 
+            </div> 
+            <div class="grupo-entrada"> 
+                <label>Altura:</label> 
+                <input type="number" id="entrada-altura-triangulo" 
+placeholder="Ingrese la altura" min="0" step="0.01"> 
+            </div> 
+            <div class="grupo-entrada"> 
+                <label>Lados (para perímetro):</label> 
+                <input type="number" id="entrada-lado1-triangulo" 
+placeholder="Lado 1" min="0" step="0.01"> 
+                <input type="number" id="entrada-lado2-triangulo" 
+placeholder="Lado 2" min="0" step="0.01"> 
+                <input type="number" id="entrada-lado3-triangulo" 
+placeholder="Lado 3" min="0" step="0.01"> 
+            </div> 
+            <button class="boton" 
+onclick="calcularTriangulo2D('area')">Calcular Área</button> 
+            <button class="boton" 
+onclick="calcularTriangulo2D('perimetro')">Calcular Perímetro</button> 
+            <div id="resultado-triangulo-2d" class="resultado">Los 
+resultados aparecerán aquí</div> 
+        </div> 
+ 
+        <!-- Esfera 3D --> 
+        <div id="pantallaesfera-3d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('menu-figuras-3d')">← Volver</button> 
+            <h2>🟠 Esfera</h2> 
+            <div class="grupo-entrada"> 
+                <label>Radio:</label> 
+                <input type="number" id="entrada-radio-esfera" 
+placeholder="Ingrese el radio" min="0" step="0.01"> 
+            </div> 
+            <button class="boton" 
+onclick="calcularEsfera('area')">Calcular Área Superficial</button> 
+            <button class="boton" 
+onclick="calcularEsfera('volumen')">Calcular Volumen</button> 
+            <div id="resultado-esfera" class="resultado">Los resultados 
+aparecerán aquí</div> 
+        </div> 
+ 
+        <!-- Cubo 3D --> 
+        <div id="pantallacubo-3d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('menu-figuras-3d')">← Volver</button> 
+            <h2>🧊 Cubo</h2> 
+            <div class="grupo-entrada"> 
+                <label>Arista:</label> 
+                <input type="number" id="entrada-arista-cubo" 
+placeholder="Ingrese la arista" min="0" step="0.01"> 
+            </div> 
+            <button class="boton" onclick="calcularCubo('area')">Calcular 
+Área Superficial</button> 
+            <button class="boton" 
+onclick="calcularCubo('volumen')">Calcular Volumen</button> 
+            <div id="resultado-cubo" class="resultado">Los resultados 
+aparecerán aquí</div> 
+        </div> 
+ 
+        <!-- Cilindro 3D --> 
+        <div id="pantallacilindro-3d" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('menu-figuras-3d')">← Volver</button> 
+            <h2>🥤 Cilindro</h2> 
+            <div class="grupo-entrada"> 
+                <label>Radio:</label> 
+                <input type="number" id="entrada-radio-cilindro" 
+placeholder="Ingrese el radio" min="0" step="0.01"> 
+            </div> 
+            <div class="grupo-entrada"> 
+                <label>Altura:</label> 
+                <input type="number" id="entrada-altura-cilindro" 
+placeholder="Ingrese la altura" min="0" step="0.01"> 
+            </div> 
+            <button class="boton" 
+onclick="calcularCilindro('area')">Calcular Área Superficial</button> 
+            <button class="boton" 
+onclick="calcularCilindro('volumen')">Calcular Volumen</button> 
+            <div id="resultado-cilindro" class="resultado">Los resultados 
+aparecerán aquí</div> 
+        </div> 
+ 
+        <!-- Matrices --> 
+        <div id="pantallamatrices" class="pantalla"> 
+            <button class="boton boton-regresar" 
+onclick="mostrarPantalla('pantalla-principal')">← Volver</button> 
+            <h2>🔢 Determinante de Matriz 4x4</h2> 
+            <p>Ingrese los 16 valores de la matriz:</p> 
+            <div class="cuadricula-matriz" id="contenedor-cuadricula-matriz"> 
+                <!-- Se generará dinámicamente --> 
+            </div> 
+            <button class="boton" 
+onclick="calcularDeterminante()">Calcular Determinante</button> 
+            <div id="resultado-matriz" class="resultado">El determinante 
+aparecerá aquí</div> 
+        </div> 
+    </div> 
+ 
+    <script src="script.js"></script> 
+</body> 
+</html> 

@@ -263,7 +263,25 @@ function crearEntradasMatriz() {
         contenedorCuadricula.appendChild(entradaMatriz);
     }
 }
- 
+
+function limpiarEntradasMatriz() {
+    for (let i = 0; i < 16; i++) {
+        const campo = document.getElementById(`entrada-matriz-${i}`);
+        if (campo) {
+            campo.value = '';
+        }
+    }
+
+    // Limpia también el área de resultados
+    mostrarResultado('resultado-matriz', '');
+     // Ocultar los pasos de resolución
+    const contenedorPasos = document.getElementById('pasos-resolucion');
+    if (contenedorPasos) {
+        contenedorPasos.style.display = 'none';
+        contenedorPasos.innerHTML = ''; // Opcional: limpiar contenido
+    }
+}
+
 function obtenerValoresMatriz() { 
     const matrizCompleta = []; 
      
@@ -342,3 +360,70 @@ elementosMatriz[2][2] - elementosMatriz[1][2] * elementosMatriz[2][0]) +
 elementosMatriz[2][1] - elementosMatriz[1][1] * elementosMatriz[2][0]) 
     ); 
 }
+
+// pasos de resolucion
+function obtenerSubmatriz(matriz, filaExcluir, columnaExcluir) {
+    const submatriz = [];
+
+    for (let i = 0; i < matriz.length; i++) {
+        if (i === filaExcluir) continue;
+
+        const fila = [];
+        for (let j = 0; j < matriz[i].length; j++) {
+            if (j === columnaExcluir) continue;
+            fila.push(matriz[i][j]);
+        }
+
+        submatriz.push(fila);
+    }
+
+    return submatriz;
+}
+
+function mostrarPasosResolucion() {
+    try {
+        const matriz = obtenerValoresMatriz(); // Tu función ya existente
+        const pasos = resolverDeterminantePasoAPaso(matriz); // Nueva función
+        const contenedorPasos = document.getElementById('pasos-resolucion');
+
+        contenedorPasos.innerHTML = pasos.join('<br>');
+        contenedorPasos.style.display = 'block';
+    } catch (error) {
+        mostrarResultado('resultado-matriz', null, error.message);
+    }
+}
+
+function resolverDeterminantePasoAPaso(matriz) {
+    const pasos = [];
+
+    pasos.push('🔍 Resolviendo determinante de matriz 4x4 por expansión de la primera fila:');
+
+    for (let j = 0; j < 4; j++) {
+        const signo = (j % 2 === 0) ? '+' : '−';
+        const elemento = matriz[0][j];
+        const submatriz = obtenerSubmatriz(matriz, 0, j); // Ya la usas
+        const detSub = calcularDeterminante3x3(submatriz); // Ya la tienes
+        const producto = elemento * detSub * (signo === '+' ? 1 : -1);
+
+       pasos.push(`${signo} (${elemento}) × det:<br>${formatearSubmatriz(submatriz)} = <strong>${producto.toFixed(3)}</strong><br><br>`);
+    }
+
+    const total = calcularDeterminante4x4(matriz); // Tu función principal
+    pasos.push(`<strong>✅ Determinante total: ${total.toFixed(6)}</strong>`);
+
+    return pasos;
+}
+
+function formatearSubmatriz(submatriz) {
+    let html = '<table class="submatriz">';
+    for (const fila of submatriz) {
+        html += '<tr>';
+        for (const valor of fila) {
+            html += `<td>${valor}</td>`;
+        }
+        html += '</tr>';
+    }
+    html += '</table>';
+    return html;
+}
+

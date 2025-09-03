@@ -200,3 +200,14 @@ p {
         gap: 5px; 
     } 
 } 
+.submatriz {
+    border-collapse: collapse;
+    margin: 5px 0;
+}
+
+.submatriz td {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    text-align: center;
+    font-family: monospace;
+}

@@ -173,10 +173,11 @@ onclick="mostrarPantalla('pantalla-principal')">← Volver</button>
             <div class="cuadricula-matriz" id="contenedor-cuadricula-matriz"> 
                 <!-- Se generará dinámicamente --> 
             </div> 
-            <button class="boton" 
-onclick="calcularDeterminante()">Calcular Determinante</button> 
-            <div id="resultado-matriz" class="resultado">El determinante 
-aparecerá aquí</div> 
+            <button class="boton" onclick="calcularDeterminante()">Calcular Determinante</button>
+            <button onclick="mostrarPasosResolucion()" class="boton">🔍 Ver pasos de resolución</button>
+            <button class="boton" onclick="limpiarEntradasMatriz()">🗑️ Limpiar matriz</button>
+            <div id="resultado-matriz" class="resultado">El determinante aparecerá aquí</div> 
+            <div id="pasos-resolucion" style="display:none; margin-top:10px;"></div>
         </div> 
     </div> 
  

@@ -1,9 +1,12 @@
-console.log("Script cargado correctamente");
 // Inicialización cuando se carga la página 
 document.addEventListener('DOMContentLoaded', function() { 
     crearEntradasMatriz(); 
 }); 
  
+function alternarModoOscuro() {
+    document.body.classList.toggle('modo-oscuro');
+}
+
 // Función para cambiar entre pantallas 
 function mostrarPantalla(idPantalla) { 
     // Ocultar todas las pantallas 
@@ -427,3 +430,35 @@ function formatearSubmatriz(submatriz) {
     return html;
 }
 
+function imprimirResolucion() {
+    const matrizHTML = document.getElementById('contenedor-cuadricula-matriz').cloneNode(true);
+    const resultadoHTML = document.getElementById('resultado-matriz').innerHTML;
+    const pasosHTML = document.getElementById('pasos-resolucion').innerHTML;
+
+    const ventana = window.open('', '_blank');
+    ventana.document.write(`
+        <html>
+        <head>
+            <title>Resolución de matriz 4x4</title>
+            <style>
+                body { font-family: Arial, sans-serif; padding: 20px; background-color: #fff; color: #000; }
+                h2 { margin-top: 0; }
+                .matriz { display: grid; grid-template-columns: repeat(4, 50px); gap: 5px; margin-top: 10px; }
+                .matriz input { width: 50px; height: 30px; text-align: center; border: 1px solid #000; }
+                .resultado, .pasos { margin-top: 20px; }
+                table { border-collapse: collapse; margin-top: 10px; }
+                td { border: 1px solid #000; padding: 5px; text-align: center; }
+            </style>
+        </head>
+        <body>
+            <h2>🔢 Determinante de Matriz 4x4</h2>
+            <div class="matriz">${matrizHTML.innerHTML}</div>
+            <div class="resultado"><strong>Resultado:</strong><br>${resultadoHTML}</div>
+            <div class="pasos"><strong>Pasos de resolución:</strong><br>${pasosHTML}</div>
+        </body>
+        </html>
+    `);
+    ventana.document.close();
+    ventana.focus();
+    ventana.print();
+}

@@ -12,6 +12,7 @@ scale=1.0">
         <!-- Pantalla Principal --> 
         <div id="pantalla-principal" class="pantalla activa"> 
             <h1>🔢 Calculadora Geométrica y Matrices</h1> 
+            <button class="boton" onclick="alternarModoOscuro()">🌓 Modo Oscuro</button>
             <button class="boton" onclick="mostrarPantalla('menu-figuras-2d')">📐 Figuras 2D</button> 
             <button class="boton" onclick="mostrarPantalla('menu-figuras-3d')">🧊 Figuras 3D</button> 
             <button class="boton" onclick="mostrarPantalla('pantallamatrices')">🔢 Matrices</button> 
@@ -176,6 +177,7 @@ onclick="mostrarPantalla('pantalla-principal')">← Volver</button>
             <button class="boton" onclick="calcularDeterminante()">Calcular Determinante</button>
             <button onclick="mostrarPasosResolucion()" class="boton">🔍 Ver pasos de resolución</button>
             <button class="boton" onclick="limpiarEntradasMatriz()">🗑️ Limpiar matriz</button>
+            <button class="boton" onclick="imprimirResolucion()">🖨️ Imprimir resolución</button>
             <div id="resultado-matriz" class="resultado">El determinante aparecerá aquí</div> 
             <div id="pasos-resolucion" style="display:none; margin-top:10px;"></div>
         </div> 

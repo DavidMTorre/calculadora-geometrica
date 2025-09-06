@@ -1,51 +1,51 @@
-// Inicialización cuando se carga la página 
-document.addEventListener('DOMContentLoaded', function() { 
-    crearEntradasMatriz(); 
-}); 
- 
+
+// ======================================================
+// 🔹 INICIALIZACIÓN
+// ======================================================
+
+// Al cargar la página, se crean las entradas de la matriz 4x4
+document.addEventListener('DOMContentLoaded', function () {
+    crearEntradasMatriz();
+});
+
+
+// ======================================================
+// 🔹 UTILIDADES GENERALES
+// ======================================================
+
+// Alterna el modo oscuro de la aplicación
 function alternarModoOscuro() {
     document.body.classList.toggle('modo-oscuro');
 }
 
-// Función para cambiar entre pantallas 
-function mostrarPantalla(idPantalla) { 
-    // Ocultar todas las pantallas 
-    const todasLasPantallas = document.querySelectorAll('.pantalla'); 
-    todasLasPantallas.forEach(pantalla => 
-pantalla.classList.remove('activa')); 
-     
-    // Mostrar la pantalla solicitada 
-    document.getElementById(idPantalla).classList.add('activa'); 
-} 
- 
-// Función de validación de entrada
+// Cambia entre pantallas visibles
+function mostrarPantalla(idPantalla) {
+    // Ocultar todas las pantallas
+    const todasLasPantallas = document.querySelectorAll('.pantalla');
+    todasLasPantallas.forEach(pantalla => pantalla.classList.remove('activa'));
+
+    // Mostrar la pantalla solicitada
+    document.getElementById(idPantalla).classList.add('activa');
+}
+
+// Valida entradas numéricas (sin letras, ni caracteres extraños, ni negativos)
 function validarEntrada(valorEntrada, nombreCampo) {
     const valorStr = String(valorEntrada).trim();
 
-    // Verificar si está vacío
     if (valorStr === "") {
         throw new Error(`${nombreCampo} no puede estar vacío`);
     }
-
-    // Verificar letras
     if (/[a-zA-Z]/.test(valorStr)) {
         throw new Error(`No se permiten letras en ${nombreCampo}`);
     }
-
-    // Verificar caracteres especiales (excepto punto y signo negativo)
     if (/[^0-9.\-]/.test(valorStr)) {
         throw new Error(`No se permiten caracteres especiales en ${nombreCampo}`);
     }
 
-    // Convertir a número
     const numero = parseFloat(valorStr);
-
-    // Verificar si es un número válido
     if (isNaN(numero)) {
         throw new Error(`${nombreCampo} debe ser un número válido`);
     }
-
-    // Verificar si es negativo o cero
     if (numero <= 0) {
         throw new Error(`No se permiten números negativos en ${nombreCampo}`);
     }
@@ -53,318 +53,287 @@ function validarEntrada(valorEntrada, nombreCampo) {
     return numero;
 }
 
-// Función para mostrar resultados o errores 
-function mostrarResultado(idElemento, textoResultado, mensajeError = 
-null) { 
-    const elementoResultado = document.getElementById(idElemento); 
-    if (mensajeError) { 
-        elementoResultado.innerHTML = `<div 
-class="error">${mensajeError}</div>`; 
-    } else { 
-        elementoResultado.innerHTML = textoResultado; 
-    } 
-} 
- 
-// ============= CÁLCULOS FIGURAS 2D ============= 
- 
-function calcularCirculo2D(tipoOperacion) { 
-    try { 
-        const radioCirculo = 
-validarEntrada(document.getElementById('entrada-radio-circulo').value, 
-'Radio'); 
-        let resultadoCalculo; 
-         
-        if (tipoOperacion === 'area') { 
-            resultadoCalculo = Math.PI * radioCirculo * radioCirculo; 
-            mostrarResultado('resultado-circulo-2d', `Área: 
-${resultadoCalculo.toFixed(4)} unidades²`); 
-        } else if (tipoOperacion === 'perimetro') { 
-            resultadoCalculo = 2 * Math.PI * radioCirculo; 
-            mostrarResultado('resultado-circulo-2d', `Perímetro: 
-${resultadoCalculo.toFixed(4)} unidades`); 
-        } 
-    } catch (errorCapturado) { 
-        mostrarResultado('resultado-circulo-2d', null, 
-errorCapturado.message); 
-    } 
-} 
- 
-function calcularCuadrado2D(tipoOperacion) { 
-    try { 
-        const ladoCuadrado = 
-validarEntrada(document.getElementById('entrada-lado-cuadrado').value, 
-'Lado'); 
-        let resultadoCalculo; 
-         
-        if (tipoOperacion === 'area') { 
-            resultadoCalculo = ladoCuadrado * ladoCuadrado; 
-            mostrarResultado('resultado-cuadrado-2d', `Área: 
-${resultadoCalculo.toFixed(4)} unidades²`); 
-        } else if (tipoOperacion === 'perimetro') { 
-            resultadoCalculo = 4 * ladoCuadrado; 
-            mostrarResultado('resultado-cuadrado-2d', `Perímetro: 
-${resultadoCalculo.toFixed(4)} unidades`); 
-        } 
-    } catch (errorCapturado) { 
-        mostrarResultado('resultado-cuadrado-2d', null, 
-errorCapturado.message); 
-    } 
-} 
- 
-function calcularTriangulo2D(tipoOperacion) { 
-    try { 
-        if (tipoOperacion === 'area') { 
-            const baseTriangulo = 
-validarEntrada(document.getElementById('entrada-base-triangulo').value, 
-'Base'); 
-            const alturaTriangulo = 
-validarEntrada(document.getElementById('entrada-altura-triangulo').value, 
-'Altura'); 
-            const resultadoCalculo = (baseTriangulo * alturaTriangulo) / 
-2; 
-            mostrarResultado('resultado-triangulo-2d', `Área: 
-${resultadoCalculo.toFixed(4)} unidades²`); 
-        } else if (tipoOperacion === 'perimetro') { 
-            const lado1Triangulo = 
-validarEntrada(document.getElementById('entrada-lado1-triangulo').value, 
-'Lado 1'); 
-            const lado2Triangulo = 
-validarEntrada(document.getElementById('entrada-lado2-triangulo').value, 
-'Lado 2'); 
-            const lado3Triangulo = 
-validarEntrada(document.getElementById('entrada-lado3-triangulo').value, 
-'Lado 3'); 
-            const resultadoCalculo = lado1Triangulo + lado2Triangulo + 
-lado3Triangulo; 
-            mostrarResultado('resultado-triangulo-2d', `Perímetro: 
-${resultadoCalculo.toFixed(4)} unidades`); 
-        } 
-    } catch (errorCapturado) { 
-        mostrarResultado('resultado-triangulo-2d', null, 
-errorCapturado.message); 
-    } 
-} 
- 
-// ============= CÁLCULOS FIGURAS 3D ============= 
- 
-function calcularEsfera(tipoOperacion) { 
-    try { 
-        const radioEsfera = 
-validarEntrada(document.getElementById('entrada-radio-esfera').value, 
-'Radio'); 
-        let resultadoCalculo; 
-         
-        if (tipoOperacion === 'area') { 
-            // Área superficial: 4πr² 
-            resultadoCalculo = 4 * Math.PI * radioEsfera * radioEsfera; 
-            mostrarResultado('resultado-esfera', `Área Superficial: 
-${resultadoCalculo.toFixed(4)} unidades²`); 
-        } else if (tipoOperacion === 'volumen') { 
-            // Volumen: (4/3)πr³ 
-            resultadoCalculo = (4/3) * Math.PI * radioEsfera * 
-radioEsfera * radioEsfera; 
-            mostrarResultado('resultado-esfera', `Volumen: 
-${resultadoCalculo.toFixed(4)} unidades³`); 
-        } 
-    } catch (errorCapturado) { 
-        mostrarResultado('resultado-esfera', null, 
-errorCapturado.message); 
-    } 
-} 
- 
-function calcularCubo(tipoOperacion) { 
-    try { 
-        const aristaCubo = 
-validarEntrada(document.getElementById('entrada-arista-cubo').value, 
-'Arista'); 
-        let resultadoCalculo; 
-         
-        if (tipoOperacion === 'area') { 
-            // Área superficial: 6a² 
-            resultadoCalculo = 6 * aristaCubo * aristaCubo; 
-            mostrarResultado('resultado-cubo', `Área Superficial: 
-${resultadoCalculo.toFixed(4)} unidades²`); 
-        } else if (tipoOperacion === 'volumen') { 
-            // Volumen: a³ 
-            resultadoCalculo = aristaCubo * aristaCubo * aristaCubo; 
-            mostrarResultado('resultado-cubo', `Volumen: 
-${resultadoCalculo.toFixed(4)} unidades³`); 
-        } 
-    } catch (errorCapturado) { 
-        mostrarResultado('resultado-cubo', null, errorCapturado.message); 
-    } 
-} 
- 
-function calcularCilindro(tipoOperacion) { 
-    try { 
-        const radioCilindro = 
-validarEntrada(document.getElementById('entrada-radio-cilindro').value, 
-'Radio'); 
-        const alturaCilindro = 
-validarEntrada(document.getElementById('entrada-altura-cilindro').value, 
-'Altura'); 
-        let resultadoCalculo; 
-         
-        if (tipoOperacion === 'area') { 
-            // Área superficial: 2πr(r + h) 
-            resultadoCalculo = 2 * Math.PI * radioCilindro * 
-(radioCilindro + alturaCilindro); 
-            mostrarResultado('resultado-cilindro', `Área Superficial: 
-${resultadoCalculo.toFixed(4)} unidades²`); 
-        } else if (tipoOperacion === 'volumen') { 
-            // Volumen: πr²h 
-            resultadoCalculo = Math.PI * radioCilindro * radioCilindro * 
-alturaCilindro; 
-            mostrarResultado('resultado-cilindro', `Volumen: 
-${resultadoCalculo.toFixed(4)} unidades³`); 
-        } 
-    } catch (errorCapturado) { 
-        mostrarResultado('resultado-cilindro', null, 
-errorCapturado.message); 
-    } 
-} 
- 
-// ============= MATRICES ============= 
- 
+// Muestra el resultado o un mensaje de error en el elemento correspondiente
+function mostrarResultado(idElemento, textoResultado, mensajeError = null) {
+    const elementoResultado = document.getElementById(idElemento);
+
+    if (mensajeError) {
+        elementoResultado.innerHTML = `<div class="error">${mensajeError}</div>`;
+    } else {
+        elementoResultado.innerHTML = textoResultado;
+    }
+}
+
+
+// ======================================================
+// 🔹 CÁLCULOS FIGURAS 2D
+// ======================================================
+
+// Círculo (área o perímetro)
+function calcularCirculo2D(tipoOperacion) {
+    try {
+        const radio = validarEntrada(
+            document.getElementById('entrada-radio-circulo').value,
+            'Radio'
+        );
+
+        let resultado = 0;
+        if (tipoOperacion === 'area') {
+            resultado = Math.PI * radio * radio;
+            mostrarResultado('resultado-circulo-2d', `Área: ${resultado.toFixed(4)} unidades²`);
+        } else if (tipoOperacion === 'perimetro') {
+            resultado = 2 * Math.PI * radio;
+            mostrarResultado('resultado-circulo-2d', `Perímetro: ${resultado.toFixed(4)} unidades`);
+        }
+    } catch (error) {
+        mostrarResultado('resultado-circulo-2d', null, error.message);
+    }
+}
+
+// Cuadrado (área o perímetro)
+function calcularCuadrado2D(tipoOperacion) {
+    try {
+        const lado = validarEntrada(
+            document.getElementById('entrada-lado-cuadrado').value,
+            'Lado'
+        );
+
+        let resultado = 0;
+        if (tipoOperacion === 'area') {
+            resultado = lado * lado;
+            mostrarResultado('resultado-cuadrado-2d', `Área: ${resultado.toFixed(4)} unidades²`);
+        } else if (tipoOperacion === 'perimetro') {
+            resultado = 4 * lado;
+            mostrarResultado('resultado-cuadrado-2d', `Perímetro: ${resultado.toFixed(4)} unidades`);
+        }
+    } catch (error) {
+        mostrarResultado('resultado-cuadrado-2d', null, error.message);
+    }
+}
+
+// Triángulo (área o perímetro)
+function calcularTriangulo2D(tipoOperacion) {
+    try {
+        if (tipoOperacion === 'area') {
+            const base = validarEntrada(
+                document.getElementById('entrada-base-triangulo').value,
+                'Base'
+            );
+            const altura = validarEntrada(
+                document.getElementById('entrada-altura-triangulo').value,
+                'Altura'
+            );
+            const resultado = (base * altura) / 2;
+            mostrarResultado('resultado-triangulo-2d', `Área: ${resultado.toFixed(4)} unidades²`);
+        } else if (tipoOperacion === 'perimetro') {
+            const lado1 = validarEntrada(document.getElementById('entrada-lado1-triangulo').value, 'Lado 1');
+            const lado2 = validarEntrada(document.getElementById('entrada-lado2-triangulo').value, 'Lado 2');
+            const lado3 = validarEntrada(document.getElementById('entrada-lado3-triangulo').value, 'Lado 3');
+            const resultado = lado1 + lado2 + lado3;
+            mostrarResultado('resultado-triangulo-2d', `Perímetro: ${resultado.toFixed(4)} unidades`);
+        }
+    } catch (error) {
+        mostrarResultado('resultado-triangulo-2d', null, error.message);
+    }
+}
+
+
+// ======================================================
+// 🔹 CÁLCULOS FIGURAS 3D
+// ======================================================
+
+// Esfera (área superficial o volumen)
+function calcularEsfera(tipoOperacion) {
+    try {
+        const radio = validarEntrada(
+            document.getElementById('entrada-radio-esfera').value,
+            'Radio'
+        );
+
+        let resultado = 0;
+        if (tipoOperacion === 'area') {
+            resultado = 4 * Math.PI * radio * radio;
+            mostrarResultado('resultado-esfera', `Área Superficial: ${resultado.toFixed(4)} unidades²`);
+        } else if (tipoOperacion === 'volumen') {
+            resultado = (4 / 3) * Math.PI * radio ** 3;
+            mostrarResultado('resultado-esfera', `Volumen: ${resultado.toFixed(4)} unidades³`);
+        }
+    } catch (error) {
+        mostrarResultado('resultado-esfera', null, error.message);
+    }
+}
+
+// Cubo (área superficial o volumen)
+function calcularCubo(tipoOperacion) {
+    try {
+        const arista = validarEntrada(
+            document.getElementById('entrada-arista-cubo').value,
+            'Arista'
+        );
+
+        let resultado = 0;
+        if (tipoOperacion === 'area') {
+            resultado = 6 * arista * arista;
+            mostrarResultado('resultado-cubo', `Área Superficial: ${resultado.toFixed(4)} unidades²`);
+        } else if (tipoOperacion === 'volumen') {
+            resultado = arista ** 3;
+            mostrarResultado('resultado-cubo', `Volumen: ${resultado.toFixed(4)} unidades³`);
+        }
+    } catch (error) {
+        mostrarResultado('resultado-cubo', null, error.message);
+    }
+}
+
+// Cilindro (área superficial o volumen)
+function calcularCilindro(tipoOperacion) {
+    try {
+        const radio = validarEntrada(
+            document.getElementById('entrada-radio-cilindro').value,
+            'Radio'
+        );
+        const altura = validarEntrada(
+            document.getElementById('entrada-altura-cilindro').value,
+            'Altura'
+        );
+
+        let resultado = 0;
+        if (tipoOperacion === 'area') {
+            resultado = 2 * Math.PI * radio * (radio + altura);
+            mostrarResultado('resultado-cilindro', `Área Superficial: ${resultado.toFixed(4)} unidades²`);
+        } else if (tipoOperacion === 'volumen') {
+            resultado = Math.PI * radio * radio * altura;
+            mostrarResultado('resultado-cilindro', `Volumen: ${resultado.toFixed(4)} unidades³`);
+        }
+    } catch (error) {
+        mostrarResultado('resultado-cilindro', null, error.message);
+    }
+}
+
+
+// ======================================================
+// 🔹 MATRICES 4x4
+// ======================================================
+
+// Crear inputs de la matriz 4x4
 function crearEntradasMatriz() {
-    const contenedorCuadricula = document.getElementById('contenedor-cuadricula-matriz');
-    contenedorCuadricula.innerHTML = '';
+    const contenedor = document.getElementById('contenedor-cuadricula-matriz');
+    contenedor.innerHTML = '';
 
     // Limpiar mensajes previos
     mostrarResultado('resultado-matriz', '');
 
-    // Crear 16 inputs para matriz 4x4
-    for (let indiceEntrada = 0; indiceEntrada < 16; indiceEntrada++) {
-        const entradaMatriz = document.createElement('input');
-        entradaMatriz.className = 'entrada-matriz';
-        entradaMatriz.step = '0.1';
-        entradaMatriz.placeholder = '0';
-        entradaMatriz.id = `entrada-matriz-${indiceEntrada}`;
+    for (let i = 0; i < 16; i++) {
+        const input = document.createElement('input');
+        input.className = 'entrada-matriz';
+        input.step = '0.1';
+        input.placeholder = '0';
+        input.id = `entrada-matriz-${i}`;
 
         // Validación en tiempo real
-        entradaMatriz.addEventListener('input', function () {
+        input.addEventListener('input', function () {
             const valor = this.value;
 
-            // Detectar letras
             if (/[a-zA-Z]/.test(valor)) {
-                mostrarResultado('resultado-matriz', null, `No se permiten letras en la posición ${indiceEntrada + 1}`);
+                mostrarResultado('resultado-matriz', null, `No se permiten letras en la posición ${i + 1}`);
                 this.value = valor.replace(/[a-zA-Z]/g, '');
                 return;
             }
-
-            // Detectar caracteres especiales (excepto punto y signo negativo)
             if (/[^0-9.\-]/.test(valor)) {
-                mostrarResultado('resultado-matriz', null, `No se permiten caracteres especiales en la posición ${indiceEntrada + 1}`);
+                mostrarResultado('resultado-matriz', null, `No se permiten caracteres especiales en la posición ${i + 1}`);
                 this.value = valor.replace(/[^0-9.\-]/g, '');
                 return;
             }
 
-            // Si todo está bien, limpiar mensaje de error
             mostrarResultado('resultado-matriz', '');
         });
 
-        contenedorCuadricula.appendChild(entradaMatriz);
+        contenedor.appendChild(input);
     }
 }
 
+// Limpia las entradas y resultados de la matriz
 function limpiarEntradasMatriz() {
     for (let i = 0; i < 16; i++) {
         const campo = document.getElementById(`entrada-matriz-${i}`);
-        if (campo) {
-            campo.value = '';
-        }
+        if (campo) campo.value = '';
     }
 
-    // Limpia también el área de resultados
     mostrarResultado('resultado-matriz', '');
-     // Ocultar los pasos de resolución
+
     const contenedorPasos = document.getElementById('pasos-resolucion');
     if (contenedorPasos) {
         contenedorPasos.style.display = 'none';
-        contenedorPasos.innerHTML = ''; // Opcional: limpiar contenido
+        contenedorPasos.innerHTML = '';
     }
 }
 
-function obtenerValoresMatriz() { 
-    const matrizCompleta = []; 
-     
-    // Convertir los 16 inputs en matriz 4x4 
-    for (let indiceFila = 0; indiceFila < 4; indiceFila++) { 
-        matrizCompleta[indiceFila] = []; 
-        for (let indiceColumna = 0; indiceColumna < 4; indiceColumna++) { 
-            const valorEntrada = document.getElementById(`entrada-matriz-${indiceFila * 4 + indiceColumna}`).value; 
-            matrizCompleta[indiceFila][indiceColumna] = valorEntrada === 
-'' ? 0 : parseFloat(valorEntrada); 
-        } 
-    } 
-    return matrizCompleta; 
-} 
- 
-function calcularDeterminante() { 
-    try { 
-        const matrizCompleta = obtenerValoresMatriz(); 
-        const determinanteResultado = 
-calcularDeterminante4x4(matrizCompleta); 
-        mostrarResultado('resultado-matriz', `Determinante: 
-${determinanteResultado.toFixed(6)}`); 
-    } catch (errorCapturado) { 
-        mostrarResultado('resultado-matriz', null, 'Error en el cálculo del determinante'); 
-    } 
-} 
- 
-// Cálculo de determinante 4x4 usando expansión de cofactores 
-function calcularDeterminante4x4(matrizEntrada) { 
-    const elementosMatriz = matrizEntrada; 
-    return ( 
-        elementosMatriz[0][0] * calcularDeterminante3x3([ 
-            [elementosMatriz[1][1], elementosMatriz[1][2], 
-elementosMatriz[1][3]], 
-            [elementosMatriz[2][1], elementosMatriz[2][2], 
-elementosMatriz[2][3]], 
-            [elementosMatriz[3][1], elementosMatriz[3][2], 
-elementosMatriz[3][3]] 
-        ]) - 
-        elementosMatriz[0][1] * calcularDeterminante3x3([ 
-            [elementosMatriz[1][0], elementosMatriz[1][2], 
-elementosMatriz[1][3]], 
-            [elementosMatriz[2][0], elementosMatriz[2][2], 
-elementosMatriz[2][3]], 
-            [elementosMatriz[3][0], elementosMatriz[3][2], 
-elementosMatriz[3][3]] 
-        ]) + 
-        elementosMatriz[0][2] * calcularDeterminante3x3([ 
-            [elementosMatriz[1][0], elementosMatriz[1][1], 
-elementosMatriz[1][3]], 
-            [elementosMatriz[2][0], elementosMatriz[2][1], 
-elementosMatriz[2][3]], 
-            [elementosMatriz[3][0], elementosMatriz[3][1], 
-elementosMatriz[3][3]] 
-        ]) - 
-        elementosMatriz[0][3] * calcularDeterminante3x3([ 
-            [elementosMatriz[1][0], elementosMatriz[1][1], 
-elementosMatriz[1][2]], 
-            [elementosMatriz[2][0], elementosMatriz[2][1], 
-elementosMatriz[2][2]], 
-            [elementosMatriz[3][0], elementosMatriz[3][1], 
-elementosMatriz[3][2]] 
-        ]) 
-    ); 
-} 
- 
-// Cálculo de determinante 3x3 usando regla de Sarrus 
-function calcularDeterminante3x3(matrizEntrada) { 
-    const elementosMatriz = matrizEntrada; 
-    return ( 
-        elementosMatriz[0][0] * (elementosMatriz[1][1] * 
-elementosMatriz[2][2] - elementosMatriz[1][2] * elementosMatriz[2][1]) - 
-        elementosMatriz[0][1] * (elementosMatriz[1][0] * 
-elementosMatriz[2][2] - elementosMatriz[1][2] * elementosMatriz[2][0]) + 
-        elementosMatriz[0][2] * (elementosMatriz[1][0] * 
-elementosMatriz[2][1] - elementosMatriz[1][1] * elementosMatriz[2][0]) 
-    ); 
+// Obtiene los valores de la matriz como un array 4x4
+function obtenerValoresMatriz() {
+    const matriz = [];
+
+    for (let fila = 0; fila < 4; fila++) {
+        matriz[fila] = [];
+        for (let col = 0; col < 4; col++) {
+            const valor = document.getElementById(`entrada-matriz-${fila * 4 + col}`).value;
+            matriz[fila][col] = valor === '' ? 0 : parseFloat(valor);
+        }
+    }
+
+    return matriz;
 }
 
-// pasos de resolucion
+// Calcula el determinante de la matriz 4x4
+function calcularDeterminante() {
+    try {
+        const matriz = obtenerValoresMatriz();
+        const resultado = calcularDeterminante4x4(matriz);
+        mostrarResultado('resultado-matriz', `Determinante: ${resultado.toFixed(6)}`);
+    } catch (error) {
+        mostrarResultado('resultado-matriz', null, 'Error en el cálculo del determinante');
+    }
+}
+
+// Determinante 4x4 por expansión de cofactores
+function calcularDeterminante4x4(matriz) {
+    return (
+        matriz[0][0] * calcularDeterminante3x3([
+            [matriz[1][1], matriz[1][2], matriz[1][3]],
+            [matriz[2][1], matriz[2][2], matriz[2][3]],
+            [matriz[3][1], matriz[3][2], matriz[3][3]]
+        ]) -
+        matriz[0][1] * calcularDeterminante3x3([
+            [matriz[1][0], matriz[1][2], matriz[1][3]],
+            [matriz[2][0], matriz[2][2], matriz[2][3]],
+            [matriz[3][0], matriz[3][2], matriz[3][3]]
+        ]) +
+        matriz[0][2] * calcularDeterminante3x3([
+            [matriz[1][0], matriz[1][1], matriz[1][3]],
+            [matriz[2][0], matriz[2][1], matriz[2][3]],
+            [matriz[3][0], matriz[3][1], matriz[3][3]]
+        ]) -
+        matriz[0][3] * calcularDeterminante3x3([
+            [matriz[1][0], matriz[1][1], matriz[1][2]],
+            [matriz[2][0], matriz[2][1], matriz[2][2]],
+            [matriz[3][0], matriz[3][1], matriz[3][2]]
+        ])
+    );
+}
+
+// Determinante 3x3 (regla de Sarrus)
+function calcularDeterminante3x3(matriz) {
+    return (
+        matriz[0][0] * (matriz[1][1] * matriz[2][2] - matriz[1][2] * matriz[2][1]) -
+        matriz[0][1] * (matriz[1][0] * matriz[2][2] - matriz[1][2] * matriz[2][0]) +
+        matriz[0][2] * (matriz[1][0] * matriz[2][1] - matriz[1][1] * matriz[2][0])
+    );
+}
+
+
+// ======================================================
+// 🔹 PASOS DE RESOLUCIÓN MATRIZ
+// ======================================================
+
+// Obtiene submatriz excluyendo fila y columna
 function obtenerSubmatriz(matriz, filaExcluir, columnaExcluir) {
     const submatriz = [];
 
@@ -383,19 +352,21 @@ function obtenerSubmatriz(matriz, filaExcluir, columnaExcluir) {
     return submatriz;
 }
 
+// Muestra los pasos de la resolución del determinante
 function mostrarPasosResolucion() {
     try {
-        const matriz = obtenerValoresMatriz(); // Tu función ya existente
-        const pasos = resolverDeterminantePasoAPaso(matriz); // Nueva función
-        const contenedorPasos = document.getElementById('pasos-resolucion');
+        const matriz = obtenerValoresMatriz();
+        const pasos = resolverDeterminantePasoAPaso(matriz);
+        const contenedor = document.getElementById('pasos-resolucion');
 
-        contenedorPasos.innerHTML = pasos.join('<br>');
-        contenedorPasos.style.display = 'block';
+        contenedor.innerHTML = pasos.join('<br>');
+        contenedor.style.display = 'block';
     } catch (error) {
         mostrarResultado('resultado-matriz', null, error.message);
     }
 }
 
+// Resuelve el determinante paso a paso (expansión de la primera fila)
 function resolverDeterminantePasoAPaso(matriz) {
     const pasos = [];
 
@@ -404,19 +375,20 @@ function resolverDeterminantePasoAPaso(matriz) {
     for (let j = 0; j < 4; j++) {
         const signo = (j % 2 === 0) ? '+' : '−';
         const elemento = matriz[0][j];
-        const submatriz = obtenerSubmatriz(matriz, 0, j); // Ya la usas
-        const detSub = calcularDeterminante3x3(submatriz); // Ya la tienes
+        const submatriz = obtenerSubmatriz(matriz, 0, j);
+        const detSub = calcularDeterminante3x3(submatriz);
         const producto = elemento * detSub * (signo === '+' ? 1 : -1);
 
-       pasos.push(`${signo} (${elemento}) × det:<br>${formatearSubmatriz(submatriz)} = <strong>${producto.toFixed(3)}</strong><br><br>`);
+        pasos.push(`${signo} (${elemento}) × det:<br>${formatearSubmatriz(submatriz)} = <strong>${producto.toFixed(3)}</strong><br><br>`);
     }
 
-    const total = calcularDeterminante4x4(matriz); // Tu función principal
+    const total = calcularDeterminante4x4(matriz);
     pasos.push(`<strong>✅ Determinante total: ${total.toFixed(6)}</strong>`);
 
     return pasos;
 }
 
+// Devuelve la submatriz en formato HTML (tabla)
 function formatearSubmatriz(submatriz) {
     let html = '<table class="submatriz">';
     for (const fila of submatriz) {
@@ -430,35 +402,50 @@ function formatearSubmatriz(submatriz) {
     return html;
 }
 
+// Imprime los pasos de resolución en la misma pestaña
 function imprimirResolucion() {
-    const matrizHTML = document.getElementById('contenedor-cuadricula-matriz').cloneNode(true);
+    const matriz = document.querySelectorAll('#contenedor-cuadricula-matriz input');
     const resultadoHTML = document.getElementById('resultado-matriz').innerHTML;
     const pasosHTML = document.getElementById('pasos-resolucion').innerHTML;
 
-    const ventana = window.open('', '_blank');
-    ventana.document.write(`
-        <html>
-        <head>
-            <title>Resolución de matriz 4x4</title>
-            <style>
-                body { font-family: Arial, sans-serif; padding: 20px; background-color: #fff; color: #000; }
-                h2 { margin-top: 0; }
-                .matriz { display: grid; grid-template-columns: repeat(4, 50px); gap: 5px; margin-top: 10px; }
-                .matriz input { width: 50px; height: 30px; text-align: center; border: 1px solid #000; }
-                .resultado, .pasos { margin-top: 20px; }
-                table { border-collapse: collapse; margin-top: 10px; }
-                td { border: 1px solid #000; padding: 5px; text-align: center; }
-            </style>
-        </head>
-        <body>
-            <h2>🔢 Determinante de Matriz 4x4</h2>
-            <div class="matriz">${matrizHTML.innerHTML}</div>
-            <div class="resultado"><strong>Resultado:</strong><br>${resultadoHTML}</div>
-            <div class="pasos"><strong>Pasos de resolución:</strong><br>${pasosHTML}</div>
-        </body>
-        </html>
-    `);
-    ventana.document.close();
-    ventana.focus();
-    ventana.print();
+    // Construir tabla de matriz con valores ingresados
+    let matrizHTML = '<table>';
+    for (let i = 0; i < matriz.length; i++) {
+        if (i % 4 === 0) matrizHTML += '<tr>';
+        matrizHTML += `<td>${matriz[i].value || '-'}</td>`;
+        if (i % 4 === 3) matrizHTML += '</tr>';
+    }
+    matrizHTML += '</table>';
+
+    // Crear contenedor oculto para impresión
+    const imprimirDiv = document.createElement('div');
+    imprimirDiv.id = 'area-impresion';
+    imprimirDiv.innerHTML = `
+        <h2>🔢 Determinante de Matriz 4x4</h2>
+        <div class="matriz">${matrizHTML}</div>
+        <div class="resultado"><strong>Resultado:</strong><br>${resultadoHTML}</div>
+        <div class="pasos"><strong>Pasos de resolución:</strong><br>${pasosHTML}</div>
+    `;
+
+    // Agregar al body temporalmente
+    document.body.appendChild(imprimirDiv);
+
+    // Estilos solo para impresión
+    const estilos = document.createElement('style');
+    estilos.innerHTML = `
+        @media print {
+            body * { visibility: hidden; }
+            #area-impresion, #area-impresion * { visibility: visible; }
+            #area-impresion { position: absolute; left: 0; top: 0; width: 100%; }
+            table { border-collapse: collapse; margin-top: 10px; }
+            td { border: 1px solid #000; padding: 5px; text-align: center; }
+        }
+    `;
+    imprimirDiv.appendChild(estilos);
+
+    // Ejecutar impresión
+    window.print();
+
+    // Eliminar el div de impresión después
+    document.body.removeChild(imprimirDiv);
 }

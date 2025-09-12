@@ -269,7 +269,14 @@
             >
                 ← Volver
             </button> 
-
+            
+            <div id="contenedor-esfera" style="position: relative; text-align: center;">
+                <img src="imagenes/esfera.png" alt="Esfera con radio" width="300">
+                <div id="valor-radio" style="position: absolute; top: 120px; left: 300px; font-size: 16px; color: red;">
+                    r = 
+                </div>
+            </div>
+            
             <h2>🟠 Esfera</h2> 
 
             <div class="grupo-entrada"> 
@@ -279,6 +286,7 @@
                     placeholder="Ingrese el radio" 
                     min="0" 
                     step="0.01"
+                    oninput="actualizarTextoRadio()"
                 > 
             </div> 
 
@@ -296,9 +304,15 @@
                 Calcular Volumen
             </button> 
 
+            <button 
+                class="boton" 
+                onclick="mostrarPasosEsfera()"
+            >🧮 Ver pasos de resolución</button>
+            
             <div id="resultado-esfera" class="resultado">
                 Los resultados aparecerán aquí
             </div> 
+            <div id="pasos-esfera" class="pasos-resolucion"></div>
         </div> 
 
         <!-- Cubo 3D --> 
@@ -308,7 +322,14 @@
                 onclick="mostrarPantalla('menu-figuras-3d')"
             >
                 ← Volver
-            </button> 
+            </button>
+
+            <div id="visual-cubo" style="text-align:center; margin-top:20px;">
+                <img src="imagenes/cubo.png" alt="Cubo con arista marcada" width="300">
+                <div id="valor-arista" style="position:absolute; top:120px; left:180px; font-size:16px; color:red;">
+                    a = 
+                </div>
+            </div>            
 
             <h2>🧊 Cubo</h2> 
 
@@ -336,9 +357,16 @@
                 Calcular Volumen
             </button> 
 
+            <button 
+                class="boton" 
+                onclick="mostrarPasosCubo()"
+            >🧮 Ver pasos de resolución</button>
+
             <div id="resultado-cubo" class="resultado">
                 Los resultados aparecerán aquí
             </div> 
+            <div id="pasos-cubo" class="pasos-resolucion"></div>
+
         </div> 
 
         <!-- Cilindro 3D --> 
@@ -384,7 +412,7 @@
                 onclick="calcularCilindro('volumen')"
             >
                 Calcular Volumen
-            </button> 
+            </button>
 
             <div id="resultado-cilindro" class="resultado">
                 Los resultados aparecerán aquí

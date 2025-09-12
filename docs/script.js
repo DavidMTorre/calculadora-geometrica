@@ -163,6 +163,44 @@ function calcularEsfera(tipoOperacion) {
     }
 }
 
+function mostrarPasosEsfera() {
+    try {
+        const radioInput = document.getElementById('entrada-radio-esfera');
+        const radio = parseFloat(radioInput.value);
+
+        if (isNaN(radio) || radio <= 0) {
+            throw new Error('Ingrese un radio válido mayor que cero');
+        }
+
+        const area = 4 * Math.PI * radio * radio;
+        const volumen = (4 / 3) * Math.PI * Math.pow(radio, 3);
+
+        const pasosHTML = `
+         <strong>🔍 Definimos la variable:</strong><br>
+         Sea <em>r = ${radio}</em> unidades<br><br>
+
+         <strong>📐 Área Superficial:</strong><br>
+         Fórmula: 4 × π × r²<br>
+         Sustituyendo: 4 × ${Math.PI.toFixed(4)} × ${radio}² = ${area.toFixed(4)} unidades²<br><br>
+
+         <strong>📦 Volumen:</strong><br>
+         Fórmula: (4/3) × π × r³<br>
+         Sustituyendo: (4/3) × ${Math.PI.toFixed(4)} × ${radio}³ = ${volumen.toFixed(4)} unidades³
+        `;
+
+        const contenedorPasos = document.getElementById('pasos-esfera');
+        contenedorPasos.innerHTML = pasosHTML;
+        contenedorPasos.style.display = 'block';
+    } catch (error) {
+        document.getElementById('pasos-esfera').innerHTML = `<span style="color:red;">${error.message}</span>`;
+    }
+}
+
+function actualizarTextoRadio() {
+    const radio = document.getElementById('entrada-radio-esfera').value;
+    document.getElementById('valor-radio').textContent = `r = ${radio}`;
+}
+
 // Cubo (área superficial o volumen)
 function calcularCubo(tipoOperacion) {
     try {
@@ -182,6 +220,44 @@ function calcularCubo(tipoOperacion) {
     } catch (error) {
         mostrarResultado('resultado-cubo', null, error.message);
     }
+}
+
+function mostrarPasosCubo() {
+    try {
+        const aristaInput = document.getElementById('entrada-arista-cubo');
+        const a = parseFloat(aristaInput.value);
+
+        if (isNaN(a) || a <= 0) {
+            throw new Error('Ingrese una arista válida mayor que cero');
+        }
+
+        const area = 6 * a * a;
+        const volumen = a ** 3;
+
+        const pasosHTML = `
+            <strong>🔍 Definimos la variable:</strong><br>
+            Sea <em>a = ${a}</em> unidades<br><br>
+
+            <strong>📐 Área Superficial:</strong><br>
+            Fórmula: 6 × a²<br>
+            Sustituyendo: 6 × ${a}² = ${area.toFixed(4)} unidades²<br><br>
+
+            <strong>📦 Volumen:</strong><br>
+            Fórmula: a³<br>
+            Sustituyendo: ${a}³ = ${volumen.toFixed(4)} unidades³
+        `;
+
+        const contenedorPasos = document.getElementById('pasos-cubo');
+        contenedorPasos.innerHTML = pasosHTML;
+        contenedorPasos.style.display = 'block';
+    } catch (error) {
+        document.getElementById('pasos-cubo').innerHTML = `<span style="color:red;">${error.message}</span>`;
+    }
+}
+
+function actualizarVisualCubo() {
+    const arista = document.getElementById('entrada-arista-cubo').value;
+    document.getElementById('valor-arista').textContent = `a = ${arista}`;
 }
 
 // Cilindro (área superficial o volumen)
@@ -221,13 +297,18 @@ function crearEntradasMatriz() {
 
     // Limpiar mensajes previos
     mostrarResultado('resultado-matriz', '');
+    const pasos = document.getElementById('pasos-resolucion');
+    pasos.innerHTML = '';
+    pasos.style.display = 'none';
 
     for (let i = 0; i < 16; i++) {
         const input = document.createElement('input');
         input.className = 'entrada-matriz';
         input.step = '0.1';
-        input.placeholder = '0';
         input.id = `entrada-matriz-${i}`;
+        input.placeholder = `(${i + 1})`;
+        input.autocomplete = 'off';
+        input.value = ''; // Asegura que esté vacío
 
         // Validación en tiempo real
         input.addEventListener('input', function () {
@@ -353,20 +434,6 @@ function obtenerSubmatriz(matriz, filaExcluir, columnaExcluir) {
 }
 
 // Muestra los pasos de la resolución del determinante
-function mostrarPasosResolucion() {
-    try {
-        const matriz = obtenerValoresMatriz();
-        const pasos = resolverDeterminantePasoAPaso(matriz);
-        const contenedor = document.getElementById('pasos-resolucion');
-
-        contenedor.innerHTML = pasos.join('<br>');
-        contenedor.style.display = 'block';
-    } catch (error) {
-        mostrarResultado('resultado-matriz', null, error.message);
-    }
-}
-
-// Resuelve el determinante paso a paso (expansión de la primera fila)
 function resolverDeterminantePasoAPaso(matriz) {
     const pasos = [];
 
@@ -388,6 +455,47 @@ function resolverDeterminantePasoAPaso(matriz) {
     return pasos;
 }
 
+function mostrarPasosResolucion() {
+    try {
+        const matrizInputs = document.querySelectorAll('#contenedor-cuadricula-matriz input');
+        const resultadoContenedor = document.getElementById('resultado-matriz');
+        const pasosContenedor = document.getElementById('pasos-resolucion');
+
+        const resultadoHTML = resultadoContenedor.innerHTML.trim();
+
+        // Validación: matriz completa
+        const matrizCompleta = Array.from(matrizInputs).every(input => input.value.trim() !== '');
+        if (!matrizCompleta) throw new Error('⚠️ La matriz contiene campos vacíos. Completa todos los valores.');
+
+        // Validación: resultado calculado
+        if (
+            resultadoHTML === '' ||
+            resultadoHTML.includes('Los resultados aparecerán aquí') ||
+            resultadoHTML.includes('Error')
+        ) {
+            throw new Error('⚠️ Debes calcular el determinante antes de ver los pasos.');
+        }
+
+        // Obtener matriz como array numérico
+        const matriz = obtenerValoresMatriz();
+
+        // Generar pasos
+        const pasos = resolverDeterminantePasoAPaso(matriz);
+        pasosContenedor.innerHTML = pasos.join('<br>');
+        pasosContenedor.style.display = 'block';
+
+    } catch (error) {
+        // Mostrar el error en el área de resultado
+        const resultadoContenedor = document.getElementById('resultado-matriz');
+        resultadoContenedor.innerHTML = `<span style="color: red;">${error.message}</span>`;
+
+        // Ocultar los pasos si hay error
+        const pasosContenedor = document.getElementById('pasos-resolucion');
+        pasosContenedor.innerHTML = '';
+        pasosContenedor.style.display = 'none';
+    }
+}
+
 // Devuelve la submatriz en formato HTML (tabla)
 function formatearSubmatriz(submatriz) {
     let html = '<table class="submatriz">';
@@ -402,50 +510,75 @@ function formatearSubmatriz(submatriz) {
     return html;
 }
 
-// Imprime los pasos de resolución en la misma pestaña
 function imprimirResolucion() {
-    const matriz = document.querySelectorAll('#contenedor-cuadricula-matriz input');
-    const resultadoHTML = document.getElementById('resultado-matriz').innerHTML;
-    const pasosHTML = document.getElementById('pasos-resolucion').innerHTML;
+    try {
+        const matriz = document.querySelectorAll('#contenedor-cuadricula-matriz input');
+        const resultadoContenedor = document.getElementById('resultado-matriz');
+        const pasosContenedor = document.getElementById('pasos-resolucion');
 
-    // Construir tabla de matriz con valores ingresados
-    let matrizHTML = '<table>';
-    for (let i = 0; i < matriz.length; i++) {
-        if (i % 4 === 0) matrizHTML += '<tr>';
-        matrizHTML += `<td>${matriz[i].value || '-'}</td>`;
-        if (i % 4 === 3) matrizHTML += '</tr>';
-    }
-    matrizHTML += '</table>';
+        const resultadoHTML = resultadoContenedor.innerHTML.trim();
+        const pasosHTML = pasosContenedor.innerHTML.trim();
 
-    // Crear contenedor oculto para impresión
-    const imprimirDiv = document.createElement('div');
-    imprimirDiv.id = 'area-impresion';
-    imprimirDiv.innerHTML = `
-        <h2>🔢 Determinante de Matriz 4x4</h2>
-        <div class="matriz">${matrizHTML}</div>
-        <div class="resultado"><strong>Resultado:</strong><br>${resultadoHTML}</div>
-        <div class="pasos"><strong>Pasos de resolución:</strong><br>${pasosHTML}</div>
-    `;
+        // Validación: matriz completa
+        const matrizCompleta = Array.from(matriz).every(input => input.value.trim() !== '');
+        if (!matrizCompleta) throw new Error('⚠️ La matriz contiene campos vacíos.');
 
-    // Agregar al body temporalmente
-    document.body.appendChild(imprimirDiv);
-
-    // Estilos solo para impresión
-    const estilos = document.createElement('style');
-    estilos.innerHTML = `
-        @media print {
-            body * { visibility: hidden; }
-            #area-impresion, #area-impresion * { visibility: visible; }
-            #area-impresion { position: absolute; left: 0; top: 0; width: 100%; }
-            table { border-collapse: collapse; margin-top: 10px; }
-            td { border: 1px solid #000; padding: 5px; text-align: center; }
+        // Validación: resultado calculado
+        if (
+            resultadoHTML === '' ||
+            resultadoHTML.includes('Los resultados aparecerán aquí') ||
+            resultadoHTML.includes('Error')
+        ) {
+            throw new Error('⚠️ Debes calcular el determinante antes de imprimir.');
         }
-    `;
-    imprimirDiv.appendChild(estilos);
 
-    // Ejecutar impresión
-    window.print();
+        // Validación: pasos generados
+        if (
+            pasosHTML === '' ||
+            pasosHTML.includes('Los pasos aparecerán aquí') ||
+            pasosHTML.includes('Debe presionar el botón')
+        ) {
+            throw new Error('⚠️ Debes presionar el botón "Mostrar pasos" antes de imprimir.');
+        }
 
-    // Eliminar el div de impresión después
-    document.body.removeChild(imprimirDiv);
+        // Construir tabla HTML
+        let matrizHTML = '<table>';
+        for (let i = 0; i < matriz.length; i++) {
+            if (i % 4 === 0) matrizHTML += '<tr>';
+            matrizHTML += `<td>${matriz[i].value}</td>`;
+            if (i % 4 === 3) matrizHTML += '</tr>';
+        }
+        matrizHTML += '</table>';
+
+        // Crear contenedor de impresión
+        const imprimirDiv = document.createElement('div');
+        imprimirDiv.id = 'area-impresion';
+        imprimirDiv.innerHTML = `
+            <h2>🔢 Determinante de Matriz 4x4</h2>
+            <div class="matriz">${matrizHTML}</div>
+            <div class="resultado"><strong>Resultado:</strong><br>${resultadoHTML}</div>
+            <div class="pasos"><strong>Pasos de resolución:</strong><br>${pasosHTML}</div>
+        `;
+
+        // Estilos para impresión
+        const estilos = document.createElement('style');
+        estilos.innerHTML = `
+            @media print {
+                body * { visibility: hidden; }
+                #area-impresion, #area-impresion * { visibility: visible; }
+                #area-impresion { position: absolute; left: 0; top: 0; width: 100%; }
+                table { border-collapse: collapse; margin-top: 10px; }
+                td { border: 1px solid #000; padding: 5px; text-align: center; }
+            }
+        `;
+        imprimirDiv.appendChild(estilos);
+
+        document.body.appendChild(imprimirDiv);
+        window.print();
+        document.body.removeChild(imprimirDiv);
+
+    } catch (error) {
+        const resultadoContenedor = document.getElementById('resultado-matriz');
+        resultadoContenedor.innerHTML = `<span style="color: red;">${error.message}</span>`;
+    }
 }

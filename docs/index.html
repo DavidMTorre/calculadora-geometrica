@@ -376,7 +376,17 @@
                 onclick="mostrarPantalla('menu-figuras-3d')"
             >
                 ← Volver
-            </button> 
+            </button>
+
+            <div id="visual-cilindro" style="text-align:center; margin-top:20px;">
+                <img src="imagenes/cilindro.png" alt="Cilindro con radio y altura" width="300">
+                <div id="valor-radio-cilindro" style="position:absolute; top:120px; left:180px; font-size:16px; color:red;">
+                    r = 5
+                </div>
+                <div id="valor-altura-cilindro" style="position:absolute; top:160px; left:180px; font-size:16px; color:blue;">
+                    h = 10
+                </div>
+            </div>            
 
             <h2>🥤 Cilindro</h2> 
 
@@ -414,9 +424,17 @@
                 Calcular Volumen
             </button>
 
+            <button 
+                class="boton" 
+                onclick="mostrarPasosCilindro()"
+            >🧮 Ver pasos de resolución
+            </button>
+
             <div id="resultado-cilindro" class="resultado">
                 Los resultados aparecerán aquí
             </div> 
+            <div id="pasos-cilindro" class="pasos-resolucion"></div>
+            
         </div> 
 
         <!-- Matrices --> 

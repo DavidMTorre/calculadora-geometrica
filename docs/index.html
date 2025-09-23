@@ -324,12 +324,12 @@
                 ← Volver
             </button>
 
-            <div id="visual-cubo" style="text-align:center; margin-top:20px;">
-                <img src="imagenes/cubo.png" alt="Cubo con arista marcada" width="300">
-                <div id="valor-arista" style="position:absolute; top:120px; left:180px; font-size:16px; color:red;">
-                    a = 
-                </div>
-            </div>            
+            <div id="visual-cubo" style="position: relative; text-align:center; margin-top:20px; width:200px; height:200px; margin:auto;">
+            <img src="imagenes/cubo.png" alt="Cubo con arista marcada" width="200" height="200">
+            <div id="valor-arista" style="position:absolute; top:121px; left:15px; font-size:16px; color:red;">
+                a =
+            </div>
+        </div>           
 
             <h2>🧊 Cubo</h2> 
 
@@ -340,7 +340,9 @@
                     placeholder="Ingrese la arista" 
                     min="0" 
                     step="0.01"
-                > 
+                    oninput="actualizarVisualCubo()"
+                >
+
             </div> 
 
             <button 
@@ -378,37 +380,39 @@
                 ← Volver
             </button>
 
-            <div id="visual-cilindro" style="text-align:center; margin-top:20px;">
-                <img src="imagenes/cilindro.png" alt="Cilindro con radio y altura" width="300">
-                <div id="valor-radio-cilindro" style="position:absolute; top:120px; left:180px; font-size:16px; color:red;">
-                    r = 5
-                </div>
-                <div id="valor-altura-cilindro" style="position:absolute; top:160px; left:180px; font-size:16px; color:blue;">
-                    h = 10
-                </div>
-            </div>            
+            <div id="visual-cilindro" style="position: relative; text-align:center; margin-top:20px; width:200px; height:200px; margin:auto;">
+            <img src="imagenes/cilindro.png" alt="Cilindro con radio y altura" width="200" height="200">
+            <div id="valor-radio-cilindro" style="position:absolute; top:169px; left:106px; font-size:16px; color:red;">
+                r =
+            </div>
+            <div id="valor-altura-cilindro" style="position:absolute; top:100px; left:106px; font-size:16px; color:blue;">
+                h =
+            </div>
+        </div>
+        
+        <h2>🥤 Cilindro</h2> 
 
-            <h2>🥤 Cilindro</h2> 
+        <div class="grupo-entrada"> 
+            <label>Radio:</label> 
+            <input 
+                id="entrada-radio-cilindro" 
+                placeholder="Ingrese el radio" 
+                min="0" 
+                step="0.01"
+                oninput="actualizarVisualCilindro()"
+            > 
+        </div> 
 
-            <div class="grupo-entrada"> 
-                <label>Radio:</label> 
-                <input 
-                    id="entrada-radio-cilindro" 
-                    placeholder="Ingrese el radio" 
-                    min="0" 
-                    step="0.01"
-                > 
-            </div> 
-
-            <div class="grupo-entrada"> 
-                <label>Altura:</label> 
-                <input 
-                    id="entrada-altura-cilindro" 
-                    placeholder="Ingrese la altura" 
-                    min="0" 
-                    step="0.01"
-                > 
-            </div> 
+        <div class="grupo-entrada"> 
+            <label>Altura:</label> 
+            <input 
+                id="entrada-altura-cilindro" 
+                placeholder="Ingrese la altura" 
+                min="0" 
+                step="0.01"
+                oninput="actualizarVisualCilindro()"
+            > 
+        </div>
 
             <button 
                 class="boton" 

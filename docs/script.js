@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', function () {
     crearEntradasMatriz();
 });
 
+// ======================================================
+// 🔹 MÓDULO GENÉRICO PARA ACTUALIZAR TEXTO VISUAL IMAGENES 3D
+// ======================================================
+function actualizarVisualFigura(inputId, prefijo, destinoId) {
+    const valor = document.getElementById(inputId).value;
+    document.getElementById(destinoId).textContent = `${prefijo} = ${valor}`;
+}
 
 // ======================================================
 // 🔹 UTILIDADES GENERALES
@@ -196,9 +203,9 @@ function mostrarPasosEsfera() {
     }
 }
 
+// 🔹 Usando el módulo genérico
 function actualizarTextoRadio() {
-    const radio = document.getElementById('entrada-radio-esfera').value;
-    document.getElementById('valor-radio').textContent = `r = ${radio}`;
+    actualizarVisualFigura('entrada-radio-esfera', 'r', 'valor-radio');
 }
 
 // Cubo (área superficial o volumen)
@@ -255,9 +262,9 @@ function mostrarPasosCubo() {
     }
 }
 
+// 🔹 Usando el módulo genérico
 function actualizarVisualCubo() {
-    const arista = document.getElementById('entrada-arista-cubo').value;
-    document.getElementById('valor-arista').textContent = `a = ${arista}`;
+    actualizarVisualFigura('entrada-arista-cubo', 'a', 'valor-arista');
 }
 
 // Cilindro (área superficial o volumen)
@@ -320,12 +327,10 @@ function mostrarPasosCilindro() {
     }
 }
 
+// 🔹 Usando el módulo genérico
 function actualizarVisualCilindro() {
-    const r = document.getElementById('entrada-radio-cilindro').value;
-    const h = document.getElementById('entrada-altura-cilindro').value;
-
-    document.getElementById('valor-radio-cilindro').textContent = `r = ${r}`;
-    document.getElementById('valor-altura-cilindro').textContent = `h = ${h}`;
+    actualizarVisualFigura('entrada-radio-cilindro', 'r', 'valor-radio-cilindro');
+    actualizarVisualFigura('entrada-altura-cilindro', 'h', 'valor-altura-cilindro');
 }
 
 // ======================================================

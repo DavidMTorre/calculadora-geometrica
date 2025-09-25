@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es"> 
 <head> 
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Calculadora Geométrica y Matrices</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css"> 
 </head> 
 <body> 
@@ -12,140 +12,122 @@
         
         <!-- Pantalla Principal --> 
         <div id="pantalla-principal" class="pantalla activa"> 
-            <h1>🔢 Calculadora Geométrica y Matrices</h1> 
+            <h1><i class="fas fa-calculator"></i> Calculadora Geométrica</h1> 
 
-            <button 
-                class="boton" 
-                onclick="alternarModoOscuro()"
-            >
-                🌓 Modo Oscuro
-            </button>
+            <div class="grupo-botones">
+                <button class="boton" onclick="alternarModoOscuro()">
+                    <i class="fas fa-moon"></i> Modo Oscuro
+                </button>
+            </div>
 
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('menu-figuras-2d')"
-            >
-                📐 Figuras 2D
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('menu-figuras-3d')"
-            >
-                🧊 Figuras 3D
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('pantallamatrices')"
-            >
-                🔢 Matrices
-            </button> 
+            <div class="tarjetas-opciones">
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('menu-figuras-2d')">
+                    <i class="fas fa-shapes"></i>
+                    <h3>Figuras 2D</h3>
+                    <p>Cálculo de áreas y perímetros</p>
+                </div>
+                
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('menu-figuras-3d')">
+                    <i class="fas fa-cube"></i>
+                    <h3>Figuras 3D</h3>
+                    <p>Cálculo de volúmenes y áreas</p>
+                </div>
+                
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('pantallamatrices')">
+                    <i class="fas fa-border-all"></i>
+                    <h3>Matrices</h3>
+                    <p>Cálculo de determinantes 4x4</p>
+                </div>
+            </div>
         </div> 
 
         <!-- Menú Figuras 2D --> 
         <div id="menu-figuras-2d" class="pantalla"> 
-            <button 
-                class="boton boton-regresar" 
-                onclick="mostrarPantalla('pantalla-principal')"
-            >
-                ← Volver
+            <button class="boton boton-regresar" onclick="mostrarPantalla('pantalla-principal')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button> 
 
-            <h2>Figuras 2D</h2> 
+            <h2><i class="fas fa-shapes"></i> Figuras 2D</h2> 
 
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('pantallacirculo-2d')"
-            >
-                ⭕ Círculo
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('pantallacuadrado-2d')"
-            >
-                ⬜ Cuadrado
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('pantallatriangulo-2d')"
-            >
-                🔺 Triángulo
-            </button> 
+            <div class="tarjetas-opciones">
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('pantallacirculo-2d')">
+                    <i class="fas fa-circle"></i>
+                    <h3>Círculo</h3>
+                    <p>Área y perímetro</p>
+                </div>
+                
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('pantallacuadrado-2d')">
+                    <i class="fas fa-square"></i>
+                    <h3>Cuadrado</h3>
+                    <p>Área y perímetro</p>
+                </div>
+                
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('pantallatriangulo-2d')">
+                    <i class="fas fa-play"></i>
+                    <h3>Triángulo</h3>
+                    <p>Área y perímetro</p>
+                </div>
+            </div>
         </div> 
 
         <!-- Menú Figuras 3D --> 
         <div id="menu-figuras-3d" class="pantalla"> 
-            <button 
-                class="boton boton-regresar" 
-                onclick="mostrarPantalla('pantalla-principal')"
-            >
-                ← Volver
+            <button class="boton boton-regresar" onclick="mostrarPantalla('pantalla-principal')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button> 
 
-            <h2>Figuras 3D</h2> 
+            <h2><i class="fas fa-cube"></i> Figuras 3D</h2> 
 
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('pantallaesfera-3d')"
-            >
-                🟠 Esfera
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('pantallacubo-3d')"
-            >
-                🧊 Cubo
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPantalla('pantallacilindro-3d')"
-            >
-                🥤 Cilindro
-            </button> 
+            <div class="tarjetas-opciones">
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('pantallaesfera-3d')">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Esfera</h3>
+                    <p>Volumen y área superficial</p>
+                </div>
+                
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('pantallacubo-3d')">
+                    <i class="fas fa-cube"></i>
+                    <h3>Cubo</h3>
+                    <p>Volumen y área superficial</p>
+                </div>
+                
+                <div class="tarjeta-opcion" onclick="mostrarPantalla('pantallacilindro-3d')">
+                    <i class="fas fa-oil-can"></i>
+                    <h3>Cilindro</h3>
+                    <p>Volumen y área superficial</p>
+                </div>
+            </div>
         </div> 
 
         <!-- Círculo 2D --> 
         <div id="pantallacirculo-2d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-2d')"
-            >
-                ← Volver
+                onclick="mostrarPantalla('menu-figuras-2d')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button> 
 
-            <h2>⭕ Círculo</h2> 
+            <h2>⭕ Círculo</h2>
 
             <div class="grupo-entrada"> 
-                <label>Radio:</label> 
+                <label ><i class="fas fa-ruler"></i> Radio:</label> 
                 <input 
                     id="entrada-radio-circulo" 
                     placeholder="Ingrese el radio" 
-                    min="0" 
-                    step="0.01"
                 > 
             </div> 
 
-            <button 
-                class="boton" 
-                onclick="calcularCirculo2D('area')"
-            >
-                Calcular Área
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="calcularCirculo2D('perimetro')"
-            >
-                Calcular Perímetro
-            </button> 
+            <div class="grupo-botones">
+                <button class="boton boton-primario" onclick="calcularCirculo2D('area')">
+                    <i class="fas fa-calculator"></i> Calcular Área
+                </button> 
+                <button class="boton boton-primario" onclick="calcularCirculo2D('perimetro')">
+                    <i class="fas fa-ruler-combined"></i> Calcular Perímetro
+                </button> 
+            </div>
 
             <div id="resultado-circulo-2d" class="resultado">
-                Los resultados aparecerán aquí
+                <i class="fas fa-info-circle"></i> Los resultados aparecerán aquí
             </div> 
         </div> 
 
@@ -153,39 +135,31 @@
         <div id="pantallacuadrado-2d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-2d')"
-            >
-                ← Volver
+                onclick="mostrarPantalla('menu-figuras-2d')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button> 
 
-            <h2>⬜ Cuadrado</h2> 
+            <h2>⬜ Cuadrado</h2>
 
             <div class="grupo-entrada"> 
-                <label>Lado:</label> 
+                <label><i class="fas fa-ruler"></i> Lado:</label> 
                 <input 
                     id="entrada-lado-cuadrado" 
                     placeholder="Ingrese el lado" 
-                    min="0" 
-                    step="0.01"
                 > 
-            </div> 
+            </div>
 
-            <button 
-                class="boton" 
-                onclick="calcularCuadrado2D('area')"
-            >
-                Calcular Área
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="calcularCuadrado2D('perimetro')"
-            >
-                Calcular Perímetro
-            </button> 
+            <div class="grupo-botones">
+                <button class="boton boton-primario" onclick="calcularCuadrado2D('area')">
+                    <i class="fas fa-calculator"></i> Calcular Área
+                </button> 
+                <button class="boton boton-primario" onclick="calcularCuadrado2D('perimetro')">
+                    <i class="fas fa-ruler-combined"></i> Calcular Perímetro
+                </button> 
+            </div>
 
             <div id="resultado-cuadrado-2d" class="resultado">
-                Los resultados aparecerán aquí
+                <i class="fas fa-info-circle"></i> Los resultados aparecerán aquí
             </div> 
         </div> 
 
@@ -193,71 +167,55 @@
         <div id="pantallatriangulo-2d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-2d')"
-            >
-                ← Volver
+                onclick="mostrarPantalla('menu-figuras-2d')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button> 
 
-            <h2>🔺 Triángulo</h2> 
+            <h2>🔺 Triángulo</h2>  
 
             <div class="grupo-entrada"> 
-                <label>Base:</label> 
+                <label><i class="fas fa-ruler"></i> Base:</label> 
                 <input 
                     id="entrada-base-triangulo" 
-                    placeholder="Ingrese la base" 
-                    min="0" 
-                    step="0.01"
+                    placeholder="Ingrese la base"
                 > 
             </div> 
 
             <div class="grupo-entrada"> 
-                <label>Altura:</label> 
+                <label><i class="fas fa-ruler"></i> Altura:</label> 
                 <input 
                     id="entrada-altura-triangulo" 
                     placeholder="Ingrese la altura" 
-                    min="0" 
-                    step="0.01"
                 > 
             </div> 
 
             <div class="grupo-entrada"> 
-                <label>Lados (para perímetro):</label> 
+                <label><i class="fas fa-ruler"></i> Lados (para perímetro):</label> 
                 <input 
                     id="entrada-lado1-triangulo" 
                     placeholder="Lado 1" 
-                    min="0" 
-                    step="0.01"
                 > 
                 <input 
                     id="entrada-lado2-triangulo" 
                     placeholder="Lado 2" 
-                    min="0" 
-                    step="0.01"
                 > 
                 <input 
                     id="entrada-lado3-triangulo" 
                     placeholder="Lado 3" 
-                    min="0" 
-                    step="0.01"
                 > 
             </div> 
 
-            <button 
-                class="boton" 
-                onclick="calcularTriangulo2D('area')"
-            >
-                Calcular Área
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="calcularTriangulo2D('perimetro')"
-            >
-                Calcular Perímetro
-            </button> 
+            <div class="grupo-botones">
+                <button class="boton boton-primario" onclick="calcularTriangulo2D('area')">
+                    <i class="fas fa-calculator"></i> Calcular Área
+                </button> 
+                <button class="boton boton-primario" onclick="calcularTriangulo2D('perimetro')">
+                    <i class="fas fa-ruler-combined"></i> Calcular Perímetro
+                </button> 
+            </div>
 
             <div id="resultado-triangulo-2d" class="resultado">
-                Los resultados aparecerán aquí
+                <i class="fas fa-info-circle"></i> Los resultados aparecerán aquí
             </div> 
         </div> 
 
@@ -265,9 +223,8 @@
         <div id="pantallaesfera-3d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-3d')"
-            >
-                ← Volver
+                onclick="mostrarPantalla('menu-figuras-3d')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button> 
             
             <div id="contenedor-esfera" style="position: relative; text-align: center;">
@@ -277,51 +234,42 @@
                 </div>
             </div>
             
-            <h2>🟠 Esfera</h2> 
+            <h2>🟠 Esfera</h2>
 
             <div class="grupo-entrada"> 
-                <label>Radio:</label> 
+                <label><i class="fas fa-ruler"></i> Radio:</label> 
                 <input 
                     id="entrada-radio-esfera" 
                     placeholder="Ingrese el radio" 
-                    min="0" 
-                    step="0.01"
                     oninput="actualizarTextoRadio()"
                 > 
-            </div> 
+            </div>
 
-            <button 
-                class="boton" 
-                onclick="calcularEsfera('area')"
-            >
-                Calcular Área Superficial
-            </button> 
+            <div class="grupo-botones">
+                <button class="boton boton-primario" onclick="calcularEsfera('area')">
+                    <i class="fas fa-calculator"></i> Calcular Área Superficial
+                </button> 
+                <button class="boton boton-primario" onclick="calcularEsfera('volumen')">
+                    <i class="fas fa-ruler-combined"></i> Calcular Volumen
+                </button> 
+                <button class="boton boton-secundario" onclick="mostrarPasosEsfera()">
+                    <i class="fas fa-search"></i> Ver Pasos de resolución
+                </button> 
+            </div>
 
-            <button 
-                class="boton" 
-                onclick="calcularEsfera('volumen')"
-            >
-                Calcular Volumen
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPasosEsfera()"
-            >🧮 Ver pasos de resolución</button>
-            
             <div id="resultado-esfera" class="resultado">
-                Los resultados aparecerán aquí
+                <i class="fas fa-info-circle"></i> Los resultados aparecerán aquí
             </div> 
-            <div id="pasos-esfera" class="pasos-resolucion"></div>
-        </div> 
 
-        <!-- Cubo 3D --> 
+            <div id="pasos-esfera" class="pasos-resolucion" style="display:none;"></div>
+        </div> 
+        
+          <!-- Cubo 3D --> 
         <div id="pantallacubo-3d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-3d')"
-            >
-                ← Volver
+                onclick="mostrarPantalla('menu-figuras-3d')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button>
 
             <div id="visual-cubo" style="position: relative; text-align:center; margin-top:20px; width:200px; height:200px; margin:auto;">
@@ -329,55 +277,44 @@
             <div id="valor-arista" style="position:absolute; top:121px; left:15px; font-size:16px; color:red;">
                 a =
             </div>
-        </div>           
+            </div>
 
             <h2>🧊 Cubo</h2> 
 
             <div class="grupo-entrada"> 
-                <label>Arista:</label> 
+                <label><i class="fas fa-ruler"></i> Arista:</label> 
                 <input 
                     id="entrada-arista-cubo" 
                     placeholder="Ingrese la arista" 
-                    min="0" 
-                    step="0.01"
                     oninput="actualizarVisualCubo()"
                 >
-
-            </div> 
-
-            <button 
-                class="boton" 
-                onclick="calcularCubo('area')"
-            >
-                Calcular Área Superficial
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="calcularCubo('volumen')"
-            >
-                Calcular Volumen
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="mostrarPasosCubo()"
-            >🧮 Ver pasos de resolución</button>
+            </div>
+            
+            <div class="grupo-botones">
+                <button class="boton boton-primario" onclick="calcularCubo('area')">
+                    <i class="fas fa-calculator"></i> Calcular Área Superficial
+                </button> 
+                <button class="boton boton-primario" onclick="calcularCubo('volumen')">
+                    <i class="fas fa-ruler-combined"></i> Calcular Volumen
+                </button> 
+                <button class="boton boton-secundario" onclick="mostrarPasosCubo()">
+                    <i class="fas fa-search"></i> Ver Pasos de resolución
+                </button> 
+            </div>
 
             <div id="resultado-cubo" class="resultado">
-                Los resultados aparecerán aquí
+                <i class="fas fa-info-circle"></i> Los resultados aparecerán aquí
             </div> 
-            <div id="pasos-cubo" class="pasos-resolucion"></div>
 
+            <div id="pasos-cubo" class="pasos-resolucion" style="display:none;"></div>
         </div> 
 
         <!-- Cilindro 3D --> 
         <div id="pantallacilindro-3d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-3d')"
-            >
-                ← Volver
+                onclick="mostrarPantalla('menu-figuras-3d')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button>
 
             <div id="visual-cilindro" style="position: relative; text-align:center; margin-top:20px; width:200px; height:200px; margin:auto;">
@@ -388,118 +325,83 @@
             <div id="valor-altura-cilindro" style="position:absolute; top:100px; left:106px; font-size:16px; color:blue;">
                 h =
             </div>
-        </div>
+            </div>
         
-        <h2>🥤 Cilindro</h2> 
+            <h2>🥤 Cilindro</h2> 
 
-        <div class="grupo-entrada"> 
-            <label>Radio:</label> 
-            <input 
-                id="entrada-radio-cilindro" 
-                placeholder="Ingrese el radio" 
-                min="0" 
-                step="0.01"
-                oninput="actualizarVisualCilindro()"
-            > 
-        </div> 
+            <div class="grupo-entrada"> 
+                <label><i class="fas fa-ruler"></i> Radio:</label> 
+                <input 
+                   id="entrada-radio-cilindro" 
+                   placeholder="Ingrese el radio" 
+                   oninput="actualizarVisualCilindro()"
+                > 
+            </div> 
 
-        <div class="grupo-entrada"> 
-            <label>Altura:</label> 
-            <input 
-                id="entrada-altura-cilindro" 
-                placeholder="Ingrese la altura" 
-                min="0" 
-                step="0.01"
-                oninput="actualizarVisualCilindro()"
-            > 
-        </div>
+            <div class="grupo-entrada"> 
+                <label><i class="fas fa-ruler"></i> Altura:</label> 
+                <input 
+                   id="entrada-altura-cilindro" 
+                   placeholder="Ingrese la altura" 
+                   oninput="actualizarVisualCilindro()"
+                > 
+            </div>
 
-            <button 
-                class="boton" 
-                onclick="calcularCilindro('area')"
-            >
-                Calcular Área Superficial
-            </button> 
-
-            <button 
-                class="boton" 
-                onclick="calcularCilindro('volumen')"
-            >
-                Calcular Volumen
-            </button>
-
-            <button 
-                class="boton" 
-                onclick="mostrarPasosCilindro()"
-            >🧮 Ver pasos de resolución
-            </button>
+            <div class="grupo-botones">
+                <button class="boton boton-primario" onclick="calcularCilindro('area')">
+                    <i class="fas fa-calculator"></i> Calcular Área Superficial
+                </button> 
+                <button class="boton boton-primario" onclick="calcularCilindro('volumen')">
+                    <i class="fas fa-ruler-combined"></i> Calcular Volumen
+                </button> 
+                <button class="boton boton-secundario" onclick="mostrarPasosCilindro()">
+                    <i class="fas fa-search"></i> Ver Pasos de resolución
+                </button> 
+            </div>
 
             <div id="resultado-cilindro" class="resultado">
-                Los resultados aparecerán aquí
+                <i class="fas fa-info-circle"></i> Los resultados aparecerán aquí
             </div> 
-            <div id="pasos-cilindro" class="pasos-resolucion"></div>
-            
+
+            <div id="pasos-cilindro" class="pasos-resolucion" style="display:none;"></div>
         </div> 
 
         <!-- Matrices --> 
         <div id="pantallamatrices" class="pantalla"> 
-            <button 
-                class="boton boton-regresar" 
-                onclick="mostrarPantalla('pantalla-principal')"
-            >
-                ← Volver
+            <button class="boton boton-regresar" onclick="mostrarPantalla('pantalla-principal')">
+                <i class="fas fa-arrow-left"></i> Volver
             </button> 
 
-            <h2>🔢 Determinante de Matriz 4x4</h2> 
+            <h2><i class="fas fa-border-all"></i> Determinante de Matriz 4x4</h2> 
             <p>Ingrese los 16 valores de la matriz:</p> 
 
-            <div 
-                class="cuadricula-matriz" 
-                id="contenedor-cuadricula-matriz"
-            >
-                <!-- Se generará dinámicamente --> 
-            </div> 
+            <div class="contenedor-matriz-completa">
+                <div class="cuadricula-matriz" id="contenedor-cuadricula-matriz"></div>
+            </div>
 
-            <button 
-                class="boton" 
-                onclick="calcularDeterminante()"
-            >
-                Calcular Determinante
-            </button>
-
-            <button 
-                class="boton" 
-                onclick="mostrarPasosResolucion()"
-            >
-                🔍 Ver pasos de resolución
-            </button>
-
-            <button 
-                class="boton" 
-                onclick="limpiarEntradasMatriz()"
-            >
-                🗑️ Limpiar matriz
-            </button>
-
-            <button 
-                class="boton" 
-                onclick="imprimirResolucion()"
-            >
-                🖨️ Imprimir resolución
-            </button>
+            <div class="grupo-botones">
+                <button class="boton boton-primario" onclick="calcularDeterminante()">
+                    <i class="fas fa-calculator"></i> Calcular Determinante
+                </button>
+                <button class="boton boton-secundario" onclick="mostrarPasosResolucion()">
+                    <i class="fas fa-search"></i> Ver Pasos de resolución
+                </button>
+                <button class="boton boton-peligro" onclick="limpiarEntradasMatriz()">
+                    <i class="fas fa-trash"></i> Limpiar
+                </button>
+                <button class="boton boton-exito" onclick="imprimirResolucion()">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
 
             <div id="resultado-matriz" class="resultado">
-                El determinante aparecerá aquí
+                <i class="fas fa-info-circle"></i> El determinante aparecerá aquí
             </div> 
 
-            <div 
-                id="pasos-resolucion" 
-                style="display:none; margin-top:10px;"
-            >
-            </div>
+            <div id="pasos-resolucion" class="pasos-resolucion" style="display:none;"></div>
         </div> 
     </div> 
-
-    <script src="script.js"></script> 
+    
+    <script src="script.js"></script>
 </body> 
 </html>

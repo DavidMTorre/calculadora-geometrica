@@ -22,8 +22,21 @@ function actualizarVisualFigura(inputId, prefijo, destinoId) {
 
 // Alterna el modo oscuro de la aplicación
 function alternarModoOscuro() {
-    document.body.classList.toggle('modo-oscuro');
-}
+            document.body.classList.toggle('modo-oscuro');
+            const boton = event.target.closest('.boton');
+            if (boton) {
+                const icono = boton.querySelector('i');
+                if (icono) {
+                    if (document.body.classList.contains('modo-oscuro')) {
+                        icono.className = 'fas fa-sun';
+                        boton.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+                    } else {
+                        icono.className = 'fas fa-moon';
+                        boton.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
+                    }
+                }
+            }
+        }
 
 // Cambia entre pantallas visibles
 function mostrarPantalla(idPantalla) {

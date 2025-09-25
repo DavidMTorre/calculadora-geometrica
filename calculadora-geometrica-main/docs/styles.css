@@ -1,0 +1,262 @@
+
+/* =====================================================
+   RESET BÁSICO
+   ===================================================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =====================================================
+   LAYOUT GLOBAL
+   ===================================================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+   ===================================================== */
+.contenedor {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+}
+
+/* =====================================================
+   SISTEMA DE PANTALLAS
+   ===================================================== */
+.pantalla {
+    display: none;
+}
+
+.pantalla.activa {
+    display: block;
+    animation: aparicion 0.3s ease-in;
+}
+
+/* Animación de aparición de pantallas */
+@keyframes aparicion {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   TIPOGRAFÍA
+   ===================================================== */
+h1, h2, p, label {
+    color: #a350c4;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* =====================================================
+   BOTONES
+   ===================================================== */
+.boton {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Hover y clic en botones */
+.boton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.boton:active {
+    transform: translateY(0);
+}
+
+/* Botón de regresar */
+.boton-regresar {
+    background: linear-gradient(45deg, #718096, #4a5568);
+    margin-bottom: 1rem;
+}
+
+/* =====================================================
+   FORMULARIOS
+   ===================================================== */
+.grupo-entrada {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.grupo-entrada label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.grupo-entrada input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 5px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.grupo-entrada input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* =====================================================
+   RESULTADOS Y ERRORES
+   ===================================================== */
+.resultado {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.error {
+    color: #e53e3e;
+    background: #fed7d7;
+    border: 1px solid #feb2b2;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+/* =====================================================
+   MATRICES Y SUBMATRICES
+   ===================================================== */
+.cuadricula-matriz {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+    justify-items: center;
+}
+
+.entrada-matriz {
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    width: 100px;
+    height: 50px;
+}
+
+.entrada-matriz:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Estilos para mostrar submatrices paso a paso */
+.submatriz {
+    border-collapse: collapse;
+    margin: 5px 0;
+}
+
+.submatriz td {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    text-align: center;
+    font-family: monospace;
+}
+
+/* =====================================================
+   MODO OSCURO
+   ===================================================== */
+body.modo-oscuro {
+    background-color: #000;
+    color: #e0e0e0;
+}
+
+body.modo-oscuro .contenedor {
+    background-color: #000;
+    color: #e0e0e0;
+    box-shadow: 0 20px 40px rgba(255,255,255,0.05);
+}
+
+body.modo-oscuro .pantalla {
+    background-color: #000;
+}
+
+body.modo-oscuro .grupo-entrada {
+    background-color: #0a0a0a;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+body.modo-oscuro label {
+    color: #f0f0f0;
+}
+
+body.modo-oscuro input,
+body.modo-oscuro .boton {
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+body.modo-oscuro .resultado,
+body.modo-oscuro #pasos-resolucion,
+body.modo-oscuro .submatriz td {
+    background-color: #111;
+    color: #e0e0e0;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+/* =====================================================
+   RESPONSIVIDAD
+   ===================================================== */
+@media (max-width: 480px) {
+    .contenedor { padding: 1rem; }
+    h1 { font-size: 1.5rem; }
+    .boton { width: 100%; margin: 5px 0; }
+    .entrada-matriz { 
+        width: 50px; 
+        height: 45px; 
+        font-size: 12px; 
+    }
+    .cuadricula-matriz { gap: 5px; }
+}

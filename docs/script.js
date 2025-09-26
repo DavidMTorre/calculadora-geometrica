@@ -110,6 +110,11 @@ function calcularCirculo2D(tipoOperacion) {
     }
 }
 
+function actualizarVisualCirculo() {
+    const radio = document.getElementById('entrada-radio-circulo').value;
+    document.getElementById('valor-radio').textContent = "radio = " + (radio || "");
+}
+
 // Cuadrado (área o perímetro)
 function calcularCuadrado2D(tipoOperacion) {
     try {
@@ -129,6 +134,11 @@ function calcularCuadrado2D(tipoOperacion) {
     } catch (error) {
         mostrarResultado('resultado-cuadrado-2d', null, error.message);
     }
+}
+
+function actualizarVisualCuadrado() {
+    const lado = document.getElementById('entrada-lado-cuadrado').value;
+    document.getElementById('valor-lado').textContent = `lado = ${lado}`;
 }
 
 // Triángulo (área o perímetro)
@@ -157,6 +167,17 @@ function calcularTriangulo2D(tipoOperacion) {
     }
 }
 
+// 🔹 Actualización visual dentro de la imagen
+function actualizarVisualTriangulo() {
+    const base = (document.getElementById('entrada-base-triangulo').value || "").trim();
+    const altura = (document.getElementById('entrada-altura-triangulo').value || "").trim();
+
+    // actualizar altura centrada
+    document.getElementById('valor-altura').textContent = altura ? `h = ${altura}` : 'h =';
+
+    // actualizar base abajo
+    document.getElementById('valor-base').textContent = base ? `b = ${base}` : 'b =';
+}
 
 // ======================================================
 // 🔹 CÁLCULOS FIGURAS 3D

@@ -103,19 +103,30 @@
         <div id="pantallacirculo-2d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-2d')">
-                <i class="fas fa-arrow-left"></i> Volver
-            </button> 
+                onclick="mostrarPantalla('menu-figuras-2d')"
+            >
+                ← Volver
+            </button>
 
-            <h2>⭕ Círculo</h2>
+            <div id="contenedor-ciculo" style="position: relative; text-align: center;">
+                <img src="imagenes/Circulo.png" alt="Circulo con radio" width="300">
+                <div id="valor-radio" style="position: absolute; top: 160px; left: 300px; font-size: 16px; color: red;">
+                    radio = 
+                </div>
+            </div>
+
+            <h2>⭕ Círculo</h2> 
 
             <div class="grupo-entrada"> 
-                <label ><i class="fas fa-ruler"></i> Radio:</label> 
+                <label>Radio:</label> 
                 <input 
                     id="entrada-radio-circulo" 
                     placeholder="Ingrese el radio" 
+                    min="0" 
+                    step="0.01"
+                    oninput="actualizarVisualCirculo()"
                 > 
-            </div> 
+            </div>  
 
             <div class="grupo-botones">
                 <button class="boton boton-primario" onclick="calcularCirculo2D('area')">
@@ -135,17 +146,28 @@
         <div id="pantallacuadrado-2d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-2d')">
-                <i class="fas fa-arrow-left"></i> Volver
+                onclick="mostrarPantalla('menu-figuras-2d')"
+            >
+                ← Volver
             </button> 
 
-            <h2>⬜ Cuadrado</h2>
+            <div id="contenedor-cuadrado" style="text-align: center; margin-top:20px; width:200px; margin:auto;">
+            <img src="imagenes/Cuadrado.png" alt="Cuadrado con lado marcado" width="200">
+                <div id="valor-lado" style="font-size:16px; color:red; margin-top:5px;">
+                lado =
+                </div>
+            </div>
+
+            <h2>⬜ Cuadrado</h2> 
 
             <div class="grupo-entrada"> 
-                <label><i class="fas fa-ruler"></i> Lado:</label> 
+                <label>Lado:</label> 
                 <input 
                     id="entrada-lado-cuadrado" 
                     placeholder="Ingrese el lado" 
+                    min="0" 
+                    step="0.01"
+                    oninput="actualizarVisualCuadrado()"
                 > 
             </div>
 
@@ -167,25 +189,51 @@
         <div id="pantallatriangulo-2d" class="pantalla"> 
             <button 
                 class="boton boton-regresar" 
-                onclick="mostrarPantalla('menu-figuras-2d')">
-                <i class="fas fa-arrow-left"></i> Volver
+                onclick="mostrarPantalla('menu-figuras-2d')"
+            >
+                ← Volver
             </button> 
 
-            <h2>🔺 Triángulo</h2>  
+        <!-- contenedor de la imagen (200x200) -->
+        <div id="contenedor-triangulo" 
+            style="position: relative; text-align:center; margin-top:20px; width:200px; height:200px; margin:auto;">
+     
+                <img src="imagenes/Triangulo.png" 
+            alt="Triángulo con base y altura" 
+            width="200" height="200">
 
-            <div class="grupo-entrada"> 
-                <label><i class="fas fa-ruler"></i> Base:</label> 
-                <input 
-                    id="entrada-base-triangulo" 
-                    placeholder="Ingrese la base"
-                > 
-            </div> 
+        <!-- altura centrada -->
+        <div id="valor-altura" 
+             style="position:absolute; top:50%; left:48%; transform:translate(-50%, -50%); font-size:14px; color:red;">
+            h =
+        </div>
+
+        <!-- base en la parte inferior -->
+        <div id="valor-base" 
+             style="position:absolute; bottom:30px; left:48%; transform:translateX(-50%); font-size:14px; color:black;">
+            b =
+        </div>
+    </div>
+
+    <h2>🔺 Triángulo</h2> 
+
+    <div class="grupo-entrada"> 
+    <label>Base:</label> 
+    <input 
+        id="entrada-base-triangulo" 
+        placeholder="Ingrese la base" 
+        min="0" 
+        step="0.01"
+        oninput="actualizarVisualTriangulo()"
+    > 
+    </div> 
 
             <div class="grupo-entrada"> 
                 <label><i class="fas fa-ruler"></i> Altura:</label> 
                 <input 
                     id="entrada-altura-triangulo" 
                     placeholder="Ingrese la altura" 
+                    oninput="actualizarVisualTriangulo()" 
                 > 
             </div> 
 

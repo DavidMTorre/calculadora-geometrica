@@ -347,6 +347,36 @@ function actualizarVisualCilindro() {
 }
 
 // ======================================================
+// 🔹 FUNCIONES LIMPIAR FIGURAS 3D
+// ======================================================
+
+// Limpiar esfera
+function limpiarEsfera() {
+    document.getElementById('entrada-radio-esfera').value = '';
+    document.getElementById('resultado-esfera').innerHTML = '';
+    document.getElementById('pasos-esfera').style.display = 'none';
+    document.getElementById('valor-radio').textContent = 'r = 0';
+}
+
+// Limpiar cubo
+function limpiarCubo() {
+    document.getElementById('entrada-arista-cubo').value = '';
+    document.getElementById('resultado-cubo').innerHTML = '';
+    document.getElementById('pasos-cubo').style.display = 'none';
+    document.getElementById('valor-arista').textContent = 'a = 0';
+}
+
+// Limpiar cilindro
+function limpiarCilindro() {
+    document.getElementById('entrada-radio-cilindro').value = '';
+    document.getElementById('entrada-altura-cilindro').value = '';
+    document.getElementById('resultado-cilindro').innerHTML = '';
+    document.getElementById('pasos-cilindro').style.display = 'none';
+    document.getElementById('valor-radio-cilindro').textContent = 'r = 0';
+    document.getElementById('valor-altura-cilindro').textContent = 'h = 0';
+}
+
+// ======================================================
 // 🔹 MATRICES 4x4
 // ======================================================
 

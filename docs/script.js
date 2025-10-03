@@ -93,6 +93,100 @@ function mostrarResultado(idElemento, textoResultado, mensajeError = null) {
     }
 }
 
+// ======================================================
+// 🔹 FUNCIONALIDAD DE FORMULARIO LOGIN
+// ======================================================
+
+async function procesarRegistro() {
+    const nombre = document.getElementById('registro-nombre').value;
+    const email = document.getElementById('registro-email').value;
+    const password = document.getElementById('registro-password').value;
+    const confirmarPassword = document.getElementById('registro-confirmar-password').value;
+    const terminos = document.getElementById('aceptar-terminos').checked;
+    const temaSeleccionado = document.querySelector('input[name="tema-preferencia"]:checked').value;
+    
+    // Validaciones básicas
+    if (!nombre || !email || !password || !confirmarPassword) {
+        alert('Por favor, completa todos los campos');
+        return;
+    }
+    
+    if (password !== confirmarPassword) {
+        alert('Las contraseñas no coinciden');
+        return;
+    }
+    
+    if (!terminos) {
+        alert('Debes aceptar los términos y condiciones');
+        return;
+    }
+    
+    try {
+        const response = await fetch('http://localhost:5000/api/registro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                email: email,
+                password: password,
+                tema_preferido: temaSeleccionado
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('Registro exitoso!');
+            mostrarPantalla('pantalla-principal');
+        } else {
+            alert('Error: ' + data.error);
+        }
+    } catch (error) {
+        alert('Error de conexión con el servidor');
+    }
+}
+
+async function procesarLogin() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    
+    if (!email || !password) {
+        alert('Por favor, completa todos los campos');
+        return;
+    }
+    
+    try {
+        const response = await fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('Login exitoso! Bienvenido ' + data.usuario.nombre);
+            // Aplicar tema preferido del usuario
+            if (data.usuario.tema_preferido === 'oscuro') {
+                document.body.classList.add('modo-oscuro');
+            } else {
+                document.body.classList.remove('modo-oscuro');
+            }
+            mostrarPantalla('pantalla-principal');
+        } else {
+            alert('Error: ' + data.error);
+        }
+    } catch (error) {
+        alert('Error de conexión con el servidor');
+    }
+}
 
 // ======================================================
 // 🔹 CÁLCULOS FIGURAS 2D

@@ -20,6 +20,15 @@ function actualizarVisualFigura(inputId, prefijo, destinoId) {
 // 🔹 UTILIDADES GENERALES
 // ======================================================
 
+// Funciones para mostrar formularios
+function mostrarFormularioLogin() {
+    mostrarPantalla('formulario-login');
+}
+
+function mostrarFormularioRegistro() {
+    mostrarPantalla('formulario-registro');
+}
+
 // Alterna el modo oscuro de la aplicación
 function alternarModoOscuro() {
             document.body.classList.toggle('modo-oscuro');
